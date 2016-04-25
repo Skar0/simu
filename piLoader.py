@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from continuous_tests import khi2
 
 def piDigits():
     """Loads all pi digits and returns them in a list"""
@@ -11,4 +11,5 @@ def piDigits():
             if digit != '\n' : digits.append(int(digit))
 
     file.close()
+    khi2.histopi
     return digits
