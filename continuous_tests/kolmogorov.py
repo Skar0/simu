@@ -1,29 +1,43 @@
-from __future__ import division
-from scipy.stats import norm
-import scipy.stats as stats
-import math
+# -*- coding: utf-8 -*-
+from tools import piLoader as loader
 
-#We have 1M Pi decimals
 
-n = 1000000
+def kolmogorov(data, theoretical_distribution):
+    n = len(data)
+    empirical = []
+    cumulative = []
+    gaps = []
 
-piDecimals = [0 for x in range(n)]
+    i = 0
+    nbr_of_digits = 10
+    while i < nbr_of_digits:
+        empirical.append(empirical_distribution(data, i, n))
+        cumulative.append(theoretical_distribution(i))
+        gaps.append(abs(empirical[i]-cumulative[i]))
+        print(gaps[i])
+        i+=1
+    max_gap = max(gaps)
+    return max_gap
 
-i = 0
-with open("assets/pi6.txt") as file:
-    next(file)
-    for line in file:
-        j=0
-        while j<50:
-            piDecimals[i] = int(line[j])
-            i += 1
-            j += 1
 
-(mu, sigma) = norm.fit(piDecimals)
+def empirical_distribution(data, x, n):
+    i = 0
+    acc = 0
+    while i < n:
+        if data[i] <= x:
+            acc+=1
+        i+=1
+    return float(acc)/n
 
-d_n = stats.kstest(piDecimals,'norm',(mu,sigma),n)[0]
 
-d_alpha = (1/float(1.2239))*(1/(6*math.sqrt(n)))
+def theoretical_distribution(x):
+    a = 0
+    b = 1
+    if x < a:
+        return 0
+    elif x > b:
+        return 1
+    else:
+        return float(x - a) / (b - a)
 
-print(d_n)
-print(d_alpha)
+print kolmogorov(loader.piDigits(), theoretical_distribution)
