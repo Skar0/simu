@@ -25,7 +25,12 @@ def sumf(f, i, j):
       return sumrec(i + 1, acc + f(i))
   return sumrec(i, 0)
 
-def k(dataset):
-  effective = float(sum(dataset))/len(dataset)
-  f = lambda i: ((dataset[i] - effective)/math.sqrt(effective))**2
+def theorical_effective(dataset):
+  """computes the uniform law value on the dataset"""
+  return float(sum(dataset))/len(dataset)
+
+def k(dataset, effective=[]):
+  if effective == [] :
+    effective = [theorical_effective(dataset)] * len(dataset)
+  f = lambda i: ((dataset[i] - effective[i])/math.sqrt(effective[i]))**2
   return sumf(f, 0, len(dataset) - 1)
