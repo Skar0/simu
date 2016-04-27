@@ -1,9 +1,10 @@
-import continuous_tests.khi2 as khi2
+from continuous_tests import khi2, gap
 import latex
 from tools import piLoader
 
-dataset = khi2.histopi(piLoader.piDigits())
-print dataset
+datas = piLoader.piDigits()
+dataset = khi2.histopi(datas)
 print latex.table_generator("r", dataset, 10 * [10000])
 k = khi2.k(dataset)
-print k
+print latex.khi2_table_generator(k, len(dataset))
+gap.histopi(datas, 0, 5)
