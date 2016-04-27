@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 import math
+import random
+
+import latex
+from continuous_tests import khi2
+from tools import piLoader
 
 
 def occurrence_counter2(number):
@@ -40,7 +45,7 @@ def theoritical_classes():
     theo_proba = [0]*5
     for j in range(1,i+1):
         stir = stirling(i,j)
-        for t in range(0,i):
+        for t in range(0,j):
             stir *= (d-t)
         theo_proba[j-1]= stir/math.pow(d,i)
 
@@ -52,4 +57,27 @@ def stirling(k,r):
         return 1
     return stirling(k-1,r-1) + r*stirling(k-1,r)
 
-test = [1,2,3,4,5,  7,7,7,7,7, 8,9,9,8,0]
+def test():
+    pi = piLoader.piDigits()
+    theor = theoritical_classes()
+    obs = observed_classes(pi)
+
+    return khi2.k(obs,theor)
+
+
+"""
+print test()
+
+
+pi = piLoader.piDigits()
+print latex.table_generator("r",observed_classes(pi),theoritical_classes())
+
+
+pi2=""
+for j in range(1000000):
+    k = random.randint(0,9)
+    pi2+=str(k)
+
+
+print observed_classes(pi2)
+"""
