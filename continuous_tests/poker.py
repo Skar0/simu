@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import math
 
 
 def occurrence_counter2(number):
@@ -19,7 +20,7 @@ def occurrence_counter(number):
     return len(occurrences)
 
 
-def poker_test(numbers):
+def observed_classes(numbers):
     """Transforms a list of numbers into a list of 5-digits integers"""
     n = len(numbers)
     classes = [0, 0, 0, 0, 0]
@@ -33,8 +34,17 @@ def poker_test(numbers):
 
     return classes
 
+def theoritical_classes():
+    i = 5
+    d =10
+    theo_proba = [0]*5
+    for j in range(1,i+1):
+        stir = stirling(i,j)
+        for t in range(0,i):
+            stir *= (d-t)
+        theo_proba[j-1]= stir/math.pow(d,i)
 
-
+    return map(lambda x: x*(1000000/i),theo_proba)
 
 
 def stirling(k,r):
@@ -43,4 +53,3 @@ def stirling(k,r):
     return stirling(k-1,r-1) + r*stirling(k-1,r)
 
 test = [1,2,3,4,5,  7,7,7,7,7, 8,9,9,8,0]
-print poker_test(test)
