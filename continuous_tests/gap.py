@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 import math
 
-def gap(datas, a, b):
+def gap_dataset(datas, a, b):
   l = []
   current_length = 0
   for data in datas:
@@ -17,8 +17,19 @@ def gap(datas, a, b):
     dataset[i] = l.count(i)
   return dataset
 
+def gap_dataset2(datas, a, b):
+  l = [0] * 30
+  current_length = 0
+  for data in datas:
+    if a <= data <= b:
+      l[current_length] += 1
+      current_length = 0
+    else:
+      current_length += 1
+  return l
+
 def histopi(datas, a, b):
-  dataset = gap(datas, a, b)
+  dataset = gap_dataset(datas, a, b)
   print dataset
   plt.clf()
   plt.bar(range(len(dataset)), dataset, color="red")
@@ -29,7 +40,7 @@ def histopi(datas, a, b):
 
 def theorical_effective(dataset, a, b):
   n = sum(dataset)
-  p = float(b - a) / 9
+  p = float(b - a)/10
   l = [0] * len(dataset)
   for i in range(len(l)):
     l[i] = math.pow((1 - p), i) * n * p
