@@ -1,6 +1,5 @@
 from continuous_tests import khi2, gap
-import latex
-from tools import piLoader
+from tools import piLoader, latex
 
 datas = piLoader.piDigits()
 

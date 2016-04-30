@@ -13,7 +13,7 @@ def histopi(datas):
   plt.xlabel('pi digits')
   plt.ylabel('ocurence')
   plt.axis([-1, 10, 0, 115000])
-  plt.savefig("khi2_histopi.png", bbox_inches='tight')
+  plt.savefig("assets/khi2_histopi.png", bbox_inches='tight')
   return dataset
 
 def sumf(f, i, j):

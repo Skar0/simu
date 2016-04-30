@@ -47,7 +47,7 @@ def histopi(datas, digit):
   plt.xlabel('longueur du gap')
   plt.ylabel('occurrence')
   plt.axis([0, len(dataset), 0, max(dataset)+1000])
-  plt.savefig("gap_histopi.png", bbox_inches='tight')
+  plt.savefig("assets/gap_histopi.png", bbox_inches='tight')
 
 def theoretical_effective(dataset, gap_limit):
   """Computes the theoritical value of the gap test.
