@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from scipy.stats import chi2
 
-def table_generator(r, observed, theorical):
+def table_generator(r, observed, theoretical, beginning=1):
   tabular = "\\begin{figure}[h!]\n\\begin{center}\n"
   tabular += "\\begin{tabular}{|c|c|c|}\n"
   tabular += "\\hline\n"+ r +" & eff. observé & eff. théorique \\\\\n\\hline\n"
   for i in range(len(observed)):
-    tabular += str(i+1) + " & " + str(observed[i]) + " & " + str(theorical[i])
+    n = i + beginning
+    tabular += str(n) + " & " + str(observed[i]) + " & " + str(theoretical[i])
     tabular += "\\\\\n"
   tabular += "\hline\n\end{tabular}\n"
   tabular += "\\end{center}\n\\caption{Tableau des effectifs pour chaque classe.}\n\\end{figure}"
