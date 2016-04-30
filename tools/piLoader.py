@@ -3,7 +3,7 @@ from continuous_tests import khi2
 
 def piDigits():
     """Loads all pi digits and returns them in a list"""
-    file = open("assets/pi6.txt")
+    file = open("../assets/pi6.txt")
     next(file)
     digits = []
     for line in file :

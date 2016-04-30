@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 import math
+import random
 
+import latex
+from continuous_tests import khi2
+from tools import piLoader
 
+known_stirling_values = []
 def occurrence_counter2(number):
     """Counts the number of different digits in a number"""
     occurrences = []
@@ -40,7 +45,7 @@ def theoritical_classes():
     theo_proba = [0]*5
     for j in range(1,i+1):
         stir = stirling(i,j)
-        for t in range(0,i):
+        for t in range(0,j):
             stir *= (d-t)
         theo_proba[j-1]= stir/math.pow(d,i)
 
@@ -48,8 +53,44 @@ def theoritical_classes():
 
 
 def stirling(k,r):
+    try:
+        known_stirling_values[k]
+    except IndexError:
+        for i in range(k+1-len(known_stirling_values)):
+            known_stirling_values.append([])
+    try:
+        known_stirling_values[k][r]
+    except IndexError:
+        for i in range(r+1-len(known_stirling_values[k])):
+            known_stirling_values[k].append(None)
+
     if k==r or r==1:
         return 1
-    return stirling(k-1,r-1) + r*stirling(k-1,r)
+    if(known_stirling_values[k][r] == None):
+        known_stirling_values[k][r] = stirling(k-1,r-1) + r*stirling(k-1,r)
+    return known_stirling_values[k][r]
 
-test = [1,2,3,4,5,  7,7,7,7,7, 8,9,9,8,0]
+def test():
+    pi = piLoader.piDigits()
+    theor = theoritical_classes()
+    obs = observed_classes(pi)
+
+    return khi2.k(obs,theor)
+
+
+"""
+print test()
+
+
+pi = piLoader.piDigits()
+print latex.table_generator("r",observed_classes(pi),theoritical_classes())
+
+
+pi2=""
+for j in range(1000000):
+    k = random.randint(0,9)
+    pi2+=str(k)
+
+
+print observed_classes(pi2)
+"""
