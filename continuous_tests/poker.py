@@ -6,7 +6,7 @@ import latex
 from continuous_tests import khi2
 from tools import piLoader
 
-
+known_stirling_values = []
 def occurrence_counter2(number):
     """Counts the number of different digits in a number"""
     occurrences = []
@@ -53,9 +53,22 @@ def theoritical_classes():
 
 
 def stirling(k,r):
+    try:
+        known_stirling_values[k]
+    except IndexError:
+        for i in range(k+1-len(known_stirling_values)):
+            known_stirling_values.append([])
+    try:
+        known_stirling_values[k][r]
+    except IndexError:
+        for i in range(r+1-len(known_stirling_values[k])):
+            known_stirling_values[k].append(None)
+
     if k==r or r==1:
         return 1
-    return stirling(k-1,r-1) + r*stirling(k-1,r)
+    if(known_stirling_values[k][r] == None):
+        known_stirling_values[k][r] = stirling(k-1,r-1) + r*stirling(k-1,r)
+    return known_stirling_values[k][r]
 
 def test():
     pi = piLoader.piDigits()
