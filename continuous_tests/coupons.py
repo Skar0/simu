@@ -61,8 +61,8 @@ def theoretical(r, d, n):
 def comparative_histogram(theoretical, observed):
     """Builds a comparative histogram between the theoretical and observed classes obtained by the test"""
     plt.clf()
-    plt.bar(len(theoretical), theoretical, color="blue", linewidth=0, width=0.6, alpha=0.5)
-    plt.bar(len(observed), observed, color="red", linewidth=0, width=0.6, alpha=0.5)
+    plt.bar(range(len(theoretical)), theoretical, color="blue", linewidth=0, width=0.6, alpha=0.5)
+    plt.bar(range(len(observed)), observed, color="red", linewidth=0, width=0.6, alpha=0.5)
     plt.xlabel('Longueur de la sequence')
     plt.ylabel("Nombre d'occurences")
     plt.axis([0, len(theoretical), 0, max(theoretical) + 1000])
