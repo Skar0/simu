@@ -35,7 +35,7 @@ def theoretical(r, d, n):
     for i in range(n):
         probas.append(0)
         """prob est 0 avant 10"""
-    for j in range(10,n):
+    for j in range(10,r):
         prob = (float(math.factorial(d))/math.pow(d,j))*poker.stirling(j-1,d-1)
         probas[j] = prob
     return map(lambda x: x*n, probas)
@@ -44,7 +44,7 @@ def test():
     pi = piLoader.piDigits()
     effective = count(pi)
     effectiveval = effective[1]
-    theo = theoretical(10,10,effective[0])
+    theo = theoretical(len(effectiveval),10,effective[0])
 
     return khi2.k(effectiveval[10:],theo[10:])
 
@@ -53,6 +53,10 @@ pi = piLoader.piDigits()
 effective = count(pi)
 effectiveval = effective[1]
 print effective[0]
-theo = theoretical(10,10,effective[0])
+print effective[1]
+theo = theoretical(len(effectiveval),10,effective[0])
 print latex.table_generator("r",effectiveval[10:],theo[10:])
+khi =  khi2.k(effectiveval[10:],theo[10:])
+print khi
+print latex.khi2_table_generator(khi,effective[0])
 
