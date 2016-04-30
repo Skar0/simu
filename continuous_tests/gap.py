@@ -2,7 +2,26 @@
 import matplotlib.pyplot as plt
 import math
 
+def test(datas, digit):
+  """Computes the effective gap test for the digit in parameter
+     datas : the list of discrete values ϵ [0, 9]
+     digit : the digit on which apply the test"""
+  l = []
+  current_length = 0
+  for data in datas:
+    if data != digit:
+      current_length += 1
+    else:
+      l.append(current_length)
+      current_length = 0
+  max_length = max(l)
+  dataset = [0] * (max_length + 1)
+  for i in range(max_length + 1):
+    dataset[i] = l.count(i)
+  return dataset
+
 def gap_dataset(datas, a, b):
+  """deprecated : for non-discrete values"""
   l = []
   current_length = 0
   for data in datas:
@@ -17,31 +36,25 @@ def gap_dataset(datas, a, b):
     dataset[i] = l.count(i)
   return dataset
 
-def gap_dataset2(datas, a, b):
-  l = [0] * 30
-  current_length = 0
-  for data in datas:
-    if a <= data <= b:
-      l[current_length] += 1
-      current_length = 0
-    else:
-      current_length += 1
-  return l
-
-def histopi(datas, a, b):
-  dataset = gap_dataset(datas, a, b)
+def histopi(datas, digit):
+  """Creates a histogram showing the gap lengths for the digit in parameter
+     datas : the list of discrete datas (integer) ϵ [0, 9]
+     digit : the digit on which the gap test is based"""
+  dataset = test(datas, digit)
   print dataset
   plt.clf()
   plt.bar(range(len(dataset)), dataset, color="red")
   plt.xlabel('longueur du gap')
-  plt.ylabel('ocurence')
-  plt.axis([0, len(dataset), 0, max(dataset)+10000])
+  plt.ylabel('occurrence')
+  plt.axis([0, len(dataset), 0, max(dataset)+1000])
   plt.savefig("gap_histopi.png", bbox_inches='tight')
 
-def theorical_effective(dataset, a, b):
+def theoretical_effective(dataset, gap_limit):
+  """Computes the theoritical value of the gap test.
+     dataset : the gap count list
+     gap_limit : the length of the gap limit"""
   n = sum(dataset)
-  p = float(b - a)/10
   l = [0] * len(dataset)
-  for i in range(len(l)):
-    l[i] = math.pow((1 - p), i) * n * p
+  for i in range(len(dataset)):
+    l[i] = math.pow(0.9, min(i, gap_limit)) * 0.1 * n
   return l
