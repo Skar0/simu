@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import math
-
+import matplotlib.pyplot as plt
 import latex
 from continuous_tests import poker
 from tools import piLoader
@@ -40,23 +40,14 @@ def theoretical(r, d, n):
         probas[j] = prob
     return map(lambda x: x*n, probas)
 
-def test():
-    pi = piLoader.piDigits()
-    effective = count(pi)
-    effectiveval = effective[1]
-    theo = theoretical(len(effectiveval),10,effective[0])
 
-    return khi2.k(effectiveval[10:],theo[10:])
+def histo(expected, actual):
+    plt.clf()
+    plt.bar(1, expected, color="blue", linewidth =0, width = 0.6, alpha = 0.5)
+    plt.bar(1.1, actual, color="red", linewidth=0, width=0.6, alpha=0.5)
+    plt.xlabel('Longueur de la sequence')
+    plt.ylabel('occurrence')
+    plt.axis([0, len(expected), 0, max(expected) + 1000])
+    plt.savefig("assets/coupon_histo.png", bbox_inches='tight')
 
-#print test()
-pi = piLoader.piDigits()
-effective = count(pi)
-effectiveval = effective[1]
-print effective[0]
-print effective[1]
-theo = theoretical(len(effectiveval),10,effective[0])
-print latex.table_generator("r",effectiveval[10:],theo[10:])
-khi =  khi2.k(effectiveval[10:],theo[10:])
-print khi
-print latex.khi2_table_generator(khi,effective[0])
 
