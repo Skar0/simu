@@ -30,9 +30,3 @@ def next():
         else:
             return generate_number(i+1, acc + pi_digits[index[i]] * 10 ** (16-(i+1)))
     return generate_number(0, 0.)
-
-print "%.16f" % next()
-print "%.16f" % next()
-print "%.16f" % next()
-print "%.16f" % next()
-print "%.16f" % next()
