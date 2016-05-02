@@ -2,6 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{hyperref}
 
 \begin{document}
 \begin{titlepage}
@@ -82,10 +84,130 @@ Nous allons maintenant étudier le caractère pseudo-aléatoire de $\pi$ grâce 
 
 \subsection{Test de Khi2}
 
+\begin{figure}[h!]
+\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{khi2_histopi.png}}
+\caption{Occurrence des digits de pi}
+\label{khi2histo}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+r & eff. observé & eff. théorique \\
+\hline
+1 & 99959 & 10000\\
+2 & 99758 & 10000\\
+3 & 100026 & 10000\\
+4 & 100229 & 10000\\
+5 & 100230 & 10000\\
+6 & 100359 & 10000\\
+7 & 99548 & 10000\\
+8 & 99800 & 10000\\
+9 & 99985 & 10000\\
+10 & 100106 & 10000\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Tableau des effectifs pour chaque classe.}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\alpha$ & $K_n$ & $\chi^2$ & Résultat\\
+\hline
+0.001 & 5.50908 & 27.8771648713 & True\\
+0.025 & 5.50908 & 19.0227677986 & True\\
+0.05 & 5.50908 & 16.9189776046 & True\\
+0.1 & 5.50908 & 14.6836565733 & True\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Résultat du test de $\chi^2$}
+\end{figure}
+
 \subsection{Test du gap}
 
+\begin{figure}[h!]
+\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{gap_histopi.png}}
+\caption{Longueur du gap pour 5}
+\label{khi2histo}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+longueur du gap & eff. observé & eff. théorique \\
+\hline
+0 & 10232 & 10035.9\\
+1 & 8957 & 9032.31\\
+2 & 8091 & 8129.079\\
+3 & 7301 & 7316.1711\\
+4 & 6586 & 6584.55399\\
+5 & 5943 & 5926.098591\\
+6 & 5392 & 5333.4887319\\
+7 & 4758 & 4800.13985871\\
+8 & 4364 & 4320.12587284\\
+9 & 4003 & 3888.11328556\\
+10 & 3530 & 3499.301957\\
+11 & 3203 & 3149.3717613\\
+12 & 2794 & 2834.43458517\\
+13 & 2490 & 2550.99112665\\
+14 & 2325 & 2295.89201399\\
+15 & 2041 & 2066.30281259\\
+... & ... & ... \\
+50 & 51 & 51.7227726031\\
+51 & 42 & 46.5504953428\\
+52 & 43 & 41.8954458085\\
+53 & 38 & 37.7059012277\\
+54 & 33 & 33.9353111049\\
+55 & 36 & 30.5417799944\\
+56 & 29 & 27.487601995\\
+57 & 28 & 24.7388417955\\
+58 & 26 & 22.2649576159\\
+59 & 31 & 20.0384618543\\
+60 & 9 & 18.0346156689\\
+... & ... & ... \\
+80 & 2 & 2.19258823985\\
+81 & 1 & 2.19258823985\\
+82 & 0 & 2.19258823985\\
+83 & 1 & 2.19258823985\\
+84 & 2 & 2.19258823985\\
+85 & 2 & 2.19258823985\\
+... & ... & ...\\
+100 & 1 & 2.19258823985\\
+101 & 0 & 2.19258823985\\
+102 & 0 & 2.19258823985\\
+103 & 2 & 2.19258823985\\
+104 & 1 & 2.19258823985\\
+105 & 2 & 2.19258823985\\
+106 & 1 & 2.19258823985\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Tableau des effectifs pour chaque classe.}
+\end{figure}
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\alpha$ & $K_n$ & $\chi^2$ & Résultat\\
+\hline
+0.001 & 98.6640480349 & 156.740261033 & True\\
+0.025 & 98.6640480349 & 136.382163482 & True\\
+0.05 & 98.6640480349 & 131.03145825 & True\\
+0.1 & 98.6640480349 & 125.035359232 & True\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Résultat du test de $\chi^2$}
+\end{figure}
+
 \subsection{Test du poker}
-\subsection{Principe}
+\subsubsection*{Principe}
 Nous allons d'abord transformer les $1 000 000$ de décimales de $\pi$ en $200 000$ nombres de $5$ chiffres. Pour ce faire, nous 
 avancons simplement dans le fichier des décimales de $\pi$ en créant un nombre à $5$ chiffres séquenciellement.
 Nous allons ensuite compter le nombre de chiffres différents contenus dans ces nombres, ce qui nous donnera nos classes de la manière
