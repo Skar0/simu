@@ -21,12 +21,12 @@ def gap_test(digit):
 
 
 def coupons_test():
-    coupons_data = coupons.make_classes(data)
+    coupons_data = coupons.make_classes(100, data)
 
     samples_number = coupons_data[0]
     observed_classes = coupons_data[1]
 
-    theoretical_classes = coupons.theoretical(len(observed_classes), 10, samples_number)
+    theoretical_classes = coupons.theoretical(100, 10, samples_number)
 
     khi = khi2.k(observed_classes[10:], theoretical_classes[10:])
     print latex.table_generator("longueur de la sequence", observed_classes[10:], theoretical_classes[10:])
