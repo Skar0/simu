@@ -1,0 +1,110 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\begin{document}
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Université de Mons}\\[1.5cm] % Name of your university/college
+\textsc{\Large Simulation sur ordinateur }\\[0.5cm] % Major heading such as course name
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Etude du caractère aléatoire des décimales de $\pi$}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Auteurs :}\\
+Florent Delgrange \\
+Clément Tamines
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professeur:} \\
+Dr. Alain Buys
+\end{flushright}
+\end{minipage}\\[4cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large 02 juin 2016}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+Le but de ce projet est de montrer le caractère pseudo-aléatoire des décimales de $\pi$. Nous allons montrer dans ce rapport que les 
+décimales de $\pi$ suivent une distribution uniforme. Nous étudierons ce caractère pseudo-aléatoire via les tests vu au cours. Nous
+crérons ensuite un générateur de nombres pseudo-aléatoire grâce aux décimales de $\pi$ fournies. Enfn, nous comparerons ce générateur
+avec le générateur intégré à Python.
+
+\section{Tests sur les décimales de $\pi$}
+
+Nous allons maintenant étudier le caractère pseudo-aléatoire de $\pi$ grâce à plusieurs tests vu au cours.
+
+\subsection{Test de Khi2}
+
+\subsection{Test du gap}
+
+\subsection{Test du poker}
+\subsection{Principe}
+Nous allons d'abord transformer les $1 000 000$ de décimales de $\pi$ en $200 000$ nombres de $5$ chiffres. Pour ce faire, nous 
+avancons simplement dans le fichier des décimales de $\pi$ en créant un nombre à $5$ chiffres séquenciellement.
+Nous allons ensuite compter le nombre de chiffres différents contenus dans ces nombres, ce qui nous donnera nos classes de la manière
+suivante : \\
+\begin{itemize}
+\item Tous les chiffres sont différents
+\item Deux chiffres sont identiques
+\item Trois chiffres sont identiques
+\item Quatre chiffres sont identiques
+\item Tous les chiffres sont identiques
+\end{itemize}
+
+Nous connaissons la formule qui nous permet de calculer la probabilité que le nombre soit dans chaque classe.\\
+
+Nous allons donc compter le nombre d'échantillons dans chaque classe et le comparer avec le nombre théorique via un test de Khi2.
+
+
+\subsection{Test du collectionneur de coupons}
+
+\section{Générateur de nombres pseudo-aléatoire}
+
+\end{document}
