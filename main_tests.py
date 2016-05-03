@@ -5,7 +5,7 @@ data = piLoader.piDigits()
 
 
 def khi2_test():
-    print "### KHI2 TEST ###\n"
+    print '%' + '-' * 69 + '\n' + '% KHI2 TEST\n' + '%' + '-' * 69 + '\n'
     dataset = khi2.histopi(data)
     print latex.table_generator("r", dataset, 10 * [10000])
     k = khi2.k(dataset)
@@ -13,7 +13,7 @@ def khi2_test():
 
 
 def gap_test(digit):
-    print "### GAP TEST ###\n"
+    print '%' + '-' * 69 + '\n' + '% GAP TEST\n' + '%' + '-' * 69 + '\n'
     gap.histopi(data, digit)
     dataset = gap.test(data, digit)
     theoretical_values = gap.theoretical_effective(dataset, 80)
@@ -23,13 +23,13 @@ def gap_test(digit):
 
 
 def coupons_test():
-    print "### COUPONS TEST###\n"
-    coupons_data = coupons.make_classes(data)
+    print '%' + '-' * 69 + '\n' + '% COUPONS TEST\n' + '%' + '-' * 69 + '\n'
+    coupons_data = coupons.make_classes(100, data)
 
     samples_number = coupons_data[0]
     observed_classes = coupons_data[1]
 
-    theoretical_classes = coupons.theoretical(len(observed_classes), 10, samples_number)
+    theoretical_classes = coupons.theoretical(100, 10, samples_number)
 
     khi = khi2.k(observed_classes[10:], theoretical_classes[10:])
     print latex.table_generator("longueur de la sequence", observed_classes[10:], theoretical_classes[10:])
@@ -38,7 +38,7 @@ def coupons_test():
 
 
 def poker_test():
-    print "### POKER TEST ###\n"
+    print '%' + '-' * 69 + '\n' + '% POKER TEST\n' + '%' + '-' * 69 + '\n'
     theoretical_classes = poker.theoretical_classes()
     observed_classes = poker.observed_classes(data)
 
