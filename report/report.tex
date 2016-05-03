@@ -3,8 +3,9 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{graphicx}
+\usepackage{float}
+\usepackage{longtable}
 \usepackage{hyperref}
-
 \begin{document}
 \begin{titlepage}
 
@@ -136,9 +137,13 @@ $\alpha$ & $K_n$ & $\chi^2$ & Résultat\\
 \label{khi2histo}
 \end{figure}
 
-\begin{figure}[h!]
+%---------------------------------------------------------------------
+% GAP TEST
+%---------------------------------------------------------------------
+
+\begin{figure}[H]
 \begin{center}
-\begin{tabular}{|c|c|c|}
+\begin{longtable}{|c|c|c|}
 \hline
 longueur du gap & eff. observé & eff. théorique \\
 \hline
@@ -153,40 +158,32 @@ longueur du gap & eff. observé & eff. théorique \\
 8 & 4364 & 4320.12587284\\
 9 & 4003 & 3888.11328556\\
 10 & 3530 & 3499.301957\\
-11 & 3203 & 3149.3717613\\
-12 & 2794 & 2834.43458517\\
-13 & 2490 & 2550.99112665\\
-14 & 2325 & 2295.89201399\\
-15 & 2041 & 2066.30281259\\
-... & ... & ... \\
-50 & 51 & 51.7227726031\\
-51 & 42 & 46.5504953428\\
-52 & 43 & 41.8954458085\\
-53 & 38 & 37.7059012277\\
-54 & 33 & 33.9353111049\\
+$\vdots$ & $\vdots$ & $\vdots$ \\ 
+30 & 417 & 425.433425334\\
+31 & 357 & 382.890082801\\
+32 & 314 & 344.601074521\\
+33 & 304 & 310.140967069\\
+34 & 286 & 279.126870362\\
+35 & 260 & 251.214183326\\
+$\vdots$ & $\vdots$ & $\vdots$ \\ 
 55 & 36 & 30.5417799944\\
 56 & 29 & 27.487601995\\
 57 & 28 & 24.7388417955\\
 58 & 26 & 22.2649576159\\
 59 & 31 & 20.0384618543\\
 60 & 9 & 18.0346156689\\
-... & ... & ... \\
+$\vdots$ & $\vdots$ & $\vdots$ \\ 
+79 & 2 & 2.43620915539\\
 80 & 2 & 2.19258823985\\
 81 & 1 & 2.19258823985\\
 82 & 0 & 2.19258823985\\
 83 & 1 & 2.19258823985\\
 84 & 2 & 2.19258823985\\
 85 & 2 & 2.19258823985\\
-... & ... & ...\\
-100 & 1 & 2.19258823985\\
-101 & 0 & 2.19258823985\\
-102 & 0 & 2.19258823985\\
-103 & 2 & 2.19258823985\\
-104 & 1 & 2.19258823985\\
-105 & 2 & 2.19258823985\\
+$\vdots$ & $\vdots$ & $\vdots$ \\ 
 106 & 1 & 2.19258823985\\
 \hline
-\end{tabular}
+\end{longtable}
 \end{center}
 \caption{Tableau des effectifs pour chaque classe.}
 \end{figure}
@@ -204,7 +201,7 @@ $\alpha$ & $K_n$ & $\chi^2$ & Résultat\\
 \end{tabular}
 \end{center}
 \caption{Résultat du test de $\chi^2$}
-\end{figure}
+\end{figure} 
 
 \subsection{Test du poker}
 \subsubsection*{Principe}

@@ -41,8 +41,10 @@ def histopi(datas, digit):
      datas : the list of discrete datas (integer) ϵ [0, 9]
      digit : the digit on which the gap test is based"""
   dataset = test(datas, digit)
+  theoretical_dataset = theoretical_effective(dataset, 80)
   plt.clf()
-  plt.bar(range(len(dataset)), dataset, color="red")
+  plt.bar(range(len(dataset)), dataset, color="red", linewidth=0, width=1, alpha=0.5)
+  plt.bar(range(len(theoretical_dataset)), theoretical_dataset, color="blue", linewidth=0, width=0.5, alpha=0.5)
   plt.xlabel('longueur du gap')
   plt.ylabel('occurrence')
   plt.axis([0, len(dataset), 0, max(dataset)+1000])

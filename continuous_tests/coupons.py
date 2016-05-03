@@ -81,6 +81,6 @@ def comparative_histogram(theoretical, observed):
     plt.xlabel('Longueur de la sequence')
     plt.ylabel("Nombre d'occurences")
     plt.axis([0, len(theoretical), 0, max(theoretical) + 1000])
-    plt.savefig("assets/coupons_histogram.png", bbox_inches='tight')
+    plt.savefig("report/coupons_histogram.png", bbox_inches='tight')
 
 
