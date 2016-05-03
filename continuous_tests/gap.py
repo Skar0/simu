@@ -41,7 +41,6 @@ def histopi(datas, digit):
      datas : the list of discrete datas (integer) ϵ [0, 9]
      digit : the digit on which the gap test is based"""
   dataset = test(datas, digit)
-  print dataset
   plt.clf()
   plt.bar(range(len(dataset)), dataset, color="red")
   plt.xlabel('longueur du gap')
