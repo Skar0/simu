@@ -33,14 +33,25 @@ def table2_generator(r, observed1, observed2, theoretical, name1, name2, beginni
     tabular += "\\end{center}\n\\caption{Tableau des effectifs pour chaque classe.}\n\\end{figure}"
     return tabular
 
-def khi2_table_generator(K, n):
+def foreach(predicate, l):
+    return len(filter(predicate, l)) == len(l)
+
+def khi2_table_generator(K, n, names = ['']):
+    """K : the list of values of the khi2 K test
+       n : the number of classes"""
     alpha = [0.001, 0.025, 0.05, 0.1]
     tabular = "\\begin{figure}[H]\n\\begin{center}\n"
-    tabular += "\\begin{tabular}{|c|c|c|c|}\n"
-    tabular += "\\hline\n$\\alpha$ & $K_n$ & $\\chi^2$ & Résultat\\\\\n\\hline\n"
+    tabular += "\\begin{tabular}{|c" + '|c|' * len(K) +"c|c|}\n"
+    tabular += "\\hline\n$\\alpha$ & "
+    for k_name in names:
+        tabular += "$K_n$ " + k_name + " & "
+    tabular += "$\\chi^2$ & Résultat\\\\\n\\hline\n"
     for a in alpha:
         khi2 = chi2.ppf(1 - a, n - 1)
-        tabular += str(a) + " & " + str(K) + " & " + str(khi2) + " & " + str(K < khi2)
+        tabular += str(a) + " & "
+        for i in range(len(K)):
+            tabular += str(K[i]) + " & "
+        tabular += str(khi2) + " & " + str(foreach(lambda k: k < khi2, K))
 
         tabular += "\\\\\n"
     tabular += "\hline\n\end{tabular}\n"
