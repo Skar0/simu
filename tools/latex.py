@@ -36,7 +36,7 @@ def table2_generator(r, observed1, observed2, theoretical, name1, name2, beginni
 def foreach(predicate, l):
     return len(filter(predicate, l)) == len(l)
 
-def khi2_table_generator(K, n, names = ['']):
+def khi2_table_generator(K, n, names = ['n']):
     """K : the list of values of the khi2 K test
        n : the number of classes"""
     alpha = [0.001, 0.025, 0.05, 0.1]
@@ -44,7 +44,7 @@ def khi2_table_generator(K, n, names = ['']):
     tabular += "\\begin{tabular}{|c" + '|c|' * len(K) +"c|c|}\n"
     tabular += "\\hline\n$\\alpha$ & "
     for k_name in names:
-        tabular += "$K_n$ " + k_name + " & "
+        tabular += "$K_{" + k_name + "}$ & "
     tabular += "$\\chi^2$ & Résultat\\\\\n\\hline\n"
     for a in alpha:
         khi2 = chi2.ppf(1 - a, n - 1)
