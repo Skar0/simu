@@ -37,6 +37,14 @@ def gap_test():
     khi_gaps = [khi2.k(datasets[0], theoretical_values[0]), khi2.k(datasets[1], theoretical_values[0])]
     print latex.khi2_table_generator(khi_gaps, len(datasets[0]), ["\pi", "Python"])
 
+def poker_test():
+    print '%' + '-' * 69 + '\n' + '% POKER TEST\n' + '%' + '-' * 69 + '\n'
+    dataset1 = poker.observed_classes(poker.dataset(pirand_data))
+    dataset2 = poker.observed_classes(poker.dataset(python_data))
+    theoretical_datatset = poker.theoretical_classes()
+    print latex.table_generator('classes', [dataset1,dataset2],[theoretical_datatset, theoretical_datatset], 0, ["$\pi$ rand", "Python rand"])
 
-khi2_test()
-gap_test()
+
+#khi2_test()
+#gap_test()
+poker_test()
