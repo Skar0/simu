@@ -72,3 +72,7 @@ def stirling(k,r):
         known_stirling_values[k][r] = stirling(k-1,r-1) + r*stirling(k-1,r)
     return known_stirling_values[k][r]
 
+
+def dataset(data):
+    """Transforms non discrete values ϵ [0,1[ data list into discrete values list ϵ [0,9] """
+    return map(lambda x : int(x * 10), data)
