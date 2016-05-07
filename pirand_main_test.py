@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from tools import piLoader, latex
 import pirand
 import random
-from continuous_tests import poker, khi2, gap
+from continuous_tests import poker, khi2, gap, coupons
 
 pirand_data = [pirand.next() for x in range(int(1e6))]
 python_data = [random.random() for x in range(int(1e6))]
@@ -41,12 +41,33 @@ def poker_test():
     print '%' + '-' * 69 + '\n' + '% POKER TEST\n' + '%' + '-' * 69 + '\n'
     dataset1 = poker.observed_classes(poker.dataset(pirand_data))
     dataset2 = poker.observed_classes(poker.dataset(python_data))
-    theoretical_datatset = poker.theoretical_classes()
-    print latex.table_generator('classes', [dataset1,dataset2],[theoretical_datatset, theoretical_datatset], 0, ["\piRand", "Python rand"])
-    khi_pirand = khi2.k(dataset1,theoretical_datatset)
-    khi_python = khi2.k(dataset2,theoretical_datatset)
+    theoretical_dataset = poker.theoretical_classes()
+    print latex.table_generator('classes', [dataset1,dataset2],[theoretical_dataset, theoretical_dataset], 0, ["\piRand", "Python rand"])
+    khi_pirand = khi2.k(dataset1,theoretical_dataset)
+    khi_python = khi2.k(dataset2,theoretical_dataset)
     print latex.khi2_table_generator([khi_pirand,khi_python],len(dataset1),["\piRand", "Python"])
 
-#khi2_test()
-#gap_test()
+
+def coupons_test():
+    print '%' + '-' * 69 + '\n' + '% COUPONS TEST\n' + '%' + '-' * 69 + '\n'
+    coupons_pirand_data = coupons.make_classes(100,poker.dataset(pirand_data))
+    pirand_sample_number = coupons_pirand_data[0]
+    pirand_dataset = coupons_pirand_data[1]
+    theoretical_dataset_pirand = coupons.theoretical(100,10,pirand_sample_number)
+
+    coupons_python_data = coupons.make_classes(100,poker.dataset(python_data))
+    python_sample_number = coupons_python_data[0]
+    python_dataset = coupons_python_data[1]
+    theoretical_dataset_python = coupons.theoretical(100,10,python_sample_number)
+
+    print latex.table_generator('classes',[pirand_dataset[10:],python_dataset[10:]],
+                        [theoretical_dataset_pirand[10:],theoretical_dataset_python[10:]],0, ["\piRand", "Python rand"])
+    khi_pirand = khi2.k(pirand_dataset[10:],theoretical_dataset_pirand[10:])
+    khi_python = khi2.k(python_dataset[10:],theoretical_dataset_python[10:])
+
+    print latex.khi2_table_generator([khi_pirand,khi_python],len(pirand_dataset[10:]),["\piRand", "Python"])
+
+khi2_test()
+gap_test()
 poker_test()
+coupons_test()
