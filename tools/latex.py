@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from scipy.stats import chi2
 
+import math
+
+
 def table_generator(r, observed, theoretical, beginning=1, names= ['']):
     """
     r : the name of the count column
@@ -62,4 +65,21 @@ def khi2_table_generator(K, n, names = ['n']):
         tabular += "\\\\\n"
     tabular += "\hline\n\end{tabular}\n"
     tabular += "\\end{center}\n\\caption{Résultat du test de $\chi^2$}\n\\end{figure}"
+    return tabular
+
+
+def kolmogorov_table_generator(results, sizes):
+    alpha = [0.01, 0.05, 0.10, 0.15, 0.2]
+    values_d_alpha = [1.63, 1.36, 1.22, 1.14, 1.07]
+    tabular = "\\begin{tabular}{|c" + '|c' * 7 +"|c|c|}\n"
+    tabular += "\\hline\n $n$ & $D_{n} (pirand)$ & $D_{n} (python)$ & $D_{\\alpha = 0.01}$ & $D_{\\alpha = 0.05}$ &" \
+               "$D_{\\alpha = 0.1}$ & $D_{\\alpha = 0.15}$ & $D_{\\alpha = 0.2}$ & Res pirand & Res python\\\\ \n"
+
+    for i in range(0,len(sizes)):
+        tabular +="\\hline\n"+str(sizes[i])+" & "+str(round(results[i][0],5))+" & "+str(round(results[i][1],5))+" & "+ \
+                  str(round(values_d_alpha[0]/math.sqrt(sizes[i]),5))+" & "+str(round(values_d_alpha[1]/math.sqrt(sizes[i]),5)) + " & "+ \
+                  str(round(values_d_alpha[2] / math.sqrt(sizes[i]),5)) + " & " + str(round(values_d_alpha[3] / math.sqrt(sizes[i]),5)) + \
+            " & "+str(round(values_d_alpha[4]/math.sqrt(sizes[i]),5))+" & "+str((results[i][0] < values_d_alpha[0]/math.sqrt(sizes[i])))+ \
+            " & "+str((results[i][1] < values_d_alpha[0]/math.sqrt(sizes[i])))+"\\\\ \n"
+    tabular += "\hline\n\end{tabular}\n"
     return tabular
