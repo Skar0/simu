@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 import math
 import matplotlib.pyplot as plt
+import numpy
 
 def histopi(data):
-    """Creates a discrete dataset from datas and draw the linked histogram"""
+    """Creates a discrete dataset from data and draw the linked histogram"""
     dataset = discrete_dataset(data)
-    plt.hist(data, bins=(-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5))
+    theoretical_dataset = [theoretical_effective(dataset)]*10
+    observed = plt.bar(numpy.arange(len(dataset)) - 0.4, dataset, color="blue", width=0.4)
+    theoretical = plt.bar(numpy.arange(len(theoretical_dataset)), theoretical_dataset, color="deepskyblue", width=0.4)
+    plt.legend([observed, theoretical], ["effectifs observes", "effectifs theoriques"])
     plt.xlabel('pi digits')
     plt.ylabel('occurrence')
-    plt.axis([-1, 10, 0, 115000])
+    plt.axis([-0.3, 9.7, 0, 130000])
     plt.savefig("report/khi2_histopi.png", bbox_inches='tight')
     return dataset
 
