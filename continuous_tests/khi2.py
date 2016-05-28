@@ -12,7 +12,7 @@ def histopi(data):
     plt.legend([observed, theoretical], ["effectifs observes", "effectifs theoriques"])
     plt.xlabel('pi digits')
     plt.ylabel('occurrence')
-    plt.axis([-0.3, 9.7, 0, 130000])
+    plt.axis([-0.7, 9.7, 0, 130000])
     plt.savefig("report/khi2_histopi.png", bbox_inches='tight')
     return dataset
 
