@@ -54,7 +54,7 @@ def khi2_table_generator(K, n, names = ['n']):
     tabular += "\\hline\n$\\alpha$ & "
     for k_name in names:
         tabular += "$K_{" + k_name + "}$ & "
-    tabular += "$\\chi^2$ & Résultat\\\\\n\\hline\n"
+    tabular += "$\\chi^2_" + str(n-1) + "$ & Résultat\\\\\n\\hline\n"
     for a in alpha:
         khi2 = chi2.ppf(1 - a, n - 1)
         tabular += str(a) + " & "
