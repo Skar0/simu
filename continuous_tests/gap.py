@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 import math
+import numpy
 
 
 def test(datas, digit, gap_limit=80):
@@ -50,17 +51,18 @@ def histopi(datas, digit):
        datas : the list of discrete datas (integer) ϵ [0, 9]
        digit : the digit on which the gap test is based"""
     dataset = test(datas, digit)
-    theoretical_dataset = theoretical_effective(dataset, 80)
+    theoretical_dataset = theoretical_effective(dataset)
     plt.clf()
-    plt.bar(range(len(dataset)), dataset, color="red", linewidth=0, width=1, alpha=0.5)
-    plt.bar(range(len(theoretical_dataset)), theoretical_dataset, color="blue", linewidth=0, width=0.5, alpha=0.5)
+    observed = plt.bar(numpy.arange(len(dataset)), dataset, color="darkgreen", linewidth=0, width=0.5)
+    theoretical = plt.bar(numpy.arange(len(theoretical_dataset)) + 0.5, theoretical_dataset, color="yellowgreen", linewidth = 0, width=0.5)
+    plt.legend([observed, theoretical], ["effectifs observes", "effectifs theoriques"])
     plt.xlabel('longueur du gap')
     plt.ylabel('occurrence')
     plt.axis([0, len(dataset), 0, max(dataset)+1000])
     plt.savefig("report/gap_histopi.png", bbox_inches='tight')
 
 
-def theoretical_effective(dataset, gap_limit):
+def theoretical_effective(dataset, gap_limit=80):
     """Computes the theoritical value of the discrete gap test.
        dataset : the gap count list
        gap_limit : the length of the gap limit"""
