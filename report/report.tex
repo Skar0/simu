@@ -221,9 +221,8 @@ $\alpha$ & $K_{n}$ & $\chi^2_{81, 1 - \alpha}$ & Résultat\\
 Les résultats visibles à la figure \ref{result2} montrent que le test de $\chi^2$ effectués sur les effectifs représentant le test du gap est réussi pour tous les $\alpha$ choisis.
 
 \subsection{Test du poker}
-\subsubsection*{Principe}
-Nous allons d'abord transformer les $1 000 000$ de décimales de $\pi$ en $200 000$ nombres de $5$ chiffres. Pour ce faire, nous 
-avancons simplement dans le fichier des décimales de $\pi$ en créant un nombre à $5$ chiffres séquenciellement.
+Le test du poker consiste en la comparaison entre le fréquences théoriques des mains au poker avec les
+fréquences observées dans notre jeu de données. Pour transformer nos données en une main de poker, nous allons d'abord transformer les $1 000 000$ de décimales de $\pi$ en $200 000$ nombres de $5$ chiffres. Pour ce faire, nous allons simplement parcourir la liste des décimales fournie et y prendre 5 chiffres à la fois pour créer des nombres.\newline \newline
 Nous allons ensuite compter le nombre de chiffres différents contenus dans ces nombres, ce qui nous donnera nos classes de la manière
 suivante : \\
 \begin{itemize}
@@ -233,14 +232,100 @@ suivante : \\
 \item Quatre chiffres sont identiques
 \item Tous les chiffres sont identiques
 \end{itemize}
+\bigskip
+En connaissant $r$ le nombre de chiffres composant le nombre, nous pouvons calculer la probabilité $P_r$ d'une de ces configurations.
+Le nombre de manières de constituer $r$ paquets avec $k$ nombres est le nombre de Stirling dont la formule est la suivante :
 
-Nous connaissons la formule qui nous permet de calculer la probabilité que le nombre soit dans chaque classe.\\
+\begin{equation*}
+\begin{Bmatrix}
+k\\
+r
+\end{Bmatrix}
+=
+\begin{Bmatrix}
+k-1\\
+r-1
+\end{Bmatrix}
++
+\begin{Bmatrix}
+k-1\\
+r
+\end{Bmatrix}
+\end{equation*}
+avec 
+\begin{equation*}
+\begin{Bmatrix}
+k\\
+1
+\end{Bmatrix}
+=
+\begin{Bmatrix}
+k\\
+r
+\end{Bmatrix}
+=
+1
+\end{equation*}
+Nous allons multiplier par le nombre de façons d'affecter les paquets aux intervalles et diviser par le nombre de façons de répartir k nombres dans les intervalles pour obtenir la probabilité.\\
+\begin{equation*}
+P_r = 
+\frac{\begin{Bmatrix}
+k\\
+r
+\end{Bmatrix}d(d-1) ...(d-r+1)}{d^k}
+\end{equation*}
+\newline
+Dans notre cas nous avons des séquences de 5 chiffres ($k=5$), 10 chiffres possibles ($d=10$) et 5 classes citées précédemment ($r = 1...5$).\\
+Nous allons ensuite comparer les nombres observés d'occurrences de chaque classe et les comparer avec les valeurs théoriques avec un test de $\chi^2$ . Ces nombres d'occurrences théoriques sont obtenues en multipliant la probabilité calculée par la formule précédente par le nombre d'échantillons (un nombre de 5 chiffres constitue un échantillon) sur lequel le test est effectué (dans notre cas, ce nombre est 200000). \newline
 
-Nous allons donc compter le nombre d'échantillons dans chaque classe et le comparer avec le nombre théorique via un test de Khi2.
+La figure \ref{pokerhisto} montre les nombres d'occurrences théoriques et les nombres d'occurences théorique. Le nombre d'occurrences de séquences ayant 5 chiffres identiques est extrêmement petit, qui explique pourquoi il n'est pas visible.\\
 
+\begin{figure}[H]
+\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{poker_histogram.png}}
+\caption{Comparaison des résultats du test de Poker}
+\label{pokerhisto}
+\end{figure}
 
+Le tableau suivant montre les valeurs obtenues pour les classes du test de Poker ainsi que le résultat du test de $\chi^2$.
+\begin{figure}[H]
+\begin{center}
+\begin{longtable}{|c|c|c|}
+\hline
+Configurations & eff. observé & eff. théorique\\
+\hline
+Tous les chiffres identiques & 13 & 20.0\\
+4 chiffres identiques & 2644 & 2700.0\\
+3 chiffres identiques & 36172 & 36000.0\\
+2 chiffres identiques & 100670 & 100800.0\\
+Tous les chiffres différents & 60501 & 60480.0\\
+\hline
+\end{longtable}
+\end{center}
+\caption{Tableau des effectifs pour chaque classe.}
+\end{figure}
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\alpha$ & $K_{n}$ & $\chi^2_{4, 1 - \alpha}$ & Résultat\\
+\hline
+0.001 & 4.60820965608 & 18.4668269529 & True\\
+0.025 & 4.60820965608 & 11.1432867819 & True\\
+0.05 & 4.60820965608 & 9.48772903678 & True\\
+0.1 & 4.60820965608 & 7.77944033973 & True\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Résultat du test de $\chi^2$}
+\end{figure} 
+
+Nous remarquons que les décimales de $\pi$ fournies réussissent le test de Poker pour tous les $\alpha$ choisis.
 \subsection{Test du collectionneur de coupons}
-
+\begin{figure}[H]
+\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{coupons_histogram.png}}
+\caption{Comparaison des résultats du test du collectionneur de coupons}
+\label{couponshisto}
+\end{figure}
 \section{Générateur de nombres pseudo-aléatoire}
 
 \end{document}
