@@ -80,20 +80,20 @@ Dr. Alain Buys
 
 \section{Introduction}
 	Le but de ce projet est de montrer le caractère pseudo-aléatoire des décimales de $\pi$. Nous allons montrer dans ce rapport que les 
-décimales de $\pi$ suivent une distribution uniforme. Nous étudierons ce caractère pseudo-aléatoire via les tests vu au cours. Nous
-créerons ensuite un générateur de nombres pseudo-aléatoire grâce aux décimales de $\pi$ fournies. Enfin, nous comparerons ce générateur
+décimales de $\pi$ suivent une distribution uniforme. Nous étudierons ce caractère pseudo-aléatoire via les tests vus au cours. Nous
+créerons ensuite un générateur de nombres pseudo-aléatoires grâce aux décimales de $\pi$ fournies. Enfin, nous comparerons ce générateur
 avec le générateur intégré à Python.
 
 \section{Tests sur les décimales de $\pi$}
 
-Nous allons maintenant étudier le caractère pseudo-aléatoire de $\pi$ grâce à plusieurs tests statistiques vus au cours. \`A l'aide de séquences générées à partir de lois uniformes, nous pourrons montrer le caractère pseudo-aléatoire des décimales à conditions que celles-ci aient les mêmes propriétés que les séquences.
+Nous allons maintenant étudier le caractère pseudo-aléatoire de $\pi$ grâce à plusieurs tests statistiques. \`A l'aide de séquences générées à partir de modèles faisant intervenir une loi uniforme, nous pourrons montrer le caractère pseudo-aléatoire des décimales à conditions que celles-ci aient les mêmes propriétés que les séquences.
 
 \subsection{Test de Khi2}
 Le test de $\chi^2$ va nous permettre de tester l'adéquation des décimales de pi avec les familles de lois de probabilités que nous allons traiter par la suite. Pour se faire, on génère des séquences théoriques selon la loi de probabilité et on les réparti ainsi que les décimales de $\pi$ en classes. Les effectifs de chaque classe sont comparés aux effectifs théoriques au moyen de la formule ci-dessous :
 \[ K = \displaystyle\sum_{i=1}^n (\frac{n_i-Np_i}{\sqrt{Np_i}})^2\]
 où $n_i$ est l'effectif observé de la classe $i$ et $Np_i$, l'effectif théorique (loi uniforme) de la classe $i$. On soumet le test à une probabilité $\alpha$ de rejeter l'hypothèse nulle $H_0$. Celle-ci est acceptée si $K \leq \chi_x^2$ où $x$ est le degré de liberté. \\Celui-ci s'obtient facilement : $x$ = nombre de classes - 1. \\
 
-Soit $H_0$ = \{\textit{ les décimales de $\pi$ suivent une loi uniforme }\}, considérons une classe par chiffre, on a donc que le degré de liberté est $x = 10 - 1 = 9 $. On considère donc que l'effectif d'une classe est le nombre d'occurrence de ce même digit parmi les $1e6$ décimales présentes dans le fichier fourni. L'effectif théorique que l'on choisit est simplement une moyenne pour chaque classe.
+Soit $H_0$ = \{\textit{ les décimales de $\pi$ suivent une loi uniforme }\}, considérons une classe par chiffre, on a donc que le degré de liberté est $x = 10 - 1 = 9 $. On considère donc que l'effectif d'une classe est le nombre d'occurrence de ce même digit parmi les $1e6$ décimales présentes dans le fichier fourni. On vérifie maintenant la concordance des décimales de pi avec la loi uniforme.
 \begin{figure}[h!]
 \makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{khi2_histopi.png}}
 \caption{Occurrence des digits de pi}
@@ -106,16 +106,16 @@ Soit $H_0$ = \{\textit{ les décimales de $\pi$ suivent une loi uniforme }\}, co
 \hline
 r & eff. observé & eff. théorique\\
 \hline
-1 & 99959 & 10000\\
-2 & 99758 & 10000\\
-3 & 100026 & 10000\\
-4 & 100229 & 10000\\
-5 & 100230 & 10000\\
-6 & 100359 & 10000\\
-7 & 99548 & 10000\\
-8 & 99800 & 10000\\
-9 & 99985 & 10000\\
-10 & 100106 & 10000\\
+1 & 99959 & 100000\\
+2 & 99758 & 100000\\
+3 & 100026 & 100000\\
+4 & 100229 & 100000\\
+5 & 100230 & 100000\\
+6 & 100359 & 100000\\
+7 & 99548 & 100000\\
+8 & 99800 & 100000\\
+9 & 99985 & 100000\\
+10 & 100106 & 100000\\
 \hline
 \end{longtable}
 \end{center}
@@ -141,21 +141,34 @@ $\alpha$ & $K_{n}$ & $\chi^2_{9, 1 - \alpha}$ & Résultat\\
 Les résultats obtenus nous indiquent que le test de $\chi^2$ est réussi pour tous les $\alpha$ choisis (voir figure \ref{result1}).
 \subsection{Test du gap}
 
-\begin{figure}[H]
-\makebox[\textwidth][c]{\includegraphics[width=1\textwidth]{gap_histopi.png}}
-\caption{Longueur du gap pour 5}
-\label{khi2histo}
-\end{figure}
+Le test de Gap va nous permettre de générer des classes selon une intervalle $[a, b]$ choisie préalablement. Le but est de compter les nombres compris entre 2 valeurs appartenant à cette intervalle, c'est ce qui représente la longueur d'un gap. Une longueur de gap correspond à une classe.\\
+Afin d'adapter le test de Gap aux décimales de $\pi$, et donc à un jeu de données à valeur \textbf{discrètes}, on considère qu'une longueur de gap survient entre la récurrence d'un digit fixé au préalable.\\
+
+Soient $u_1, u_2, u_3, ..., u_i, ..., u_{1e6}$, les décimales de $\pi$, avec $0 \leq u_i \leq 9$. Après avoir sélectionné un digit $\delta$, on va sélectionner les décimales $u_j$ telles que $u_j = \delta$. Ces $u_j$ ont une probabilité $P(x=\delta) = 0.1$. On calcule ensuite les distances entre chaque occurrence de $\delta$.\\ Soit $l_n$, la probabilité d'une longueur de gap $n$, tel que $0 \leq n \leq i$.
+\[l_n = P(x \neq \delta)^n P(x=\delta)\]
+\[l_i = P(x \neq \delta)^i P(x=\delta)\]
+\[l_{>i} = P(x \neq \delta)^{i+1}\]
+\[\Leftrightarrow l_n = 0.9^n0.1\]
+\[\Leftrightarrow l_i = 0.9^i0.1\]
+\[\Leftrightarrow l_{>i} = 0.9^{i+1}\]
+
+Prenons $\delta = 5$ et $i=80$.
 
 %---------------------------------------------------------------------
 % GAP TEST
 %---------------------------------------------------------------------
 
 \begin{figure}[H]
+\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{gap_histopi.png}}
+\caption{Longueur du gap pour $\delta = 5$}
+\label{khi2histo}
+\end{figure}
+
+\begin{figure}[H]
 \begin{center}
 \begin{longtable}{|c|c|c|}
 \hline
-longueur du gap & eff. observé & eff. théorique \\
+longueur du gap & eff. observé & eff. théorique\\
 \hline
 0 & 10232 & 10035.9\\
 1 & 8957 & 9032.31\\
@@ -169,29 +182,20 @@ longueur du gap & eff. observé & eff. théorique \\
 9 & 4003 & 3888.11328556\\
 10 & 3530 & 3499.301957\\
 $\vdots$ & $\vdots$ & $\vdots$ \\ 
-30 & 417 & 425.433425334\\
-31 & 357 & 382.890082801\\
-32 & 314 & 344.601074521\\
-33 & 304 & 310.140967069\\
-34 & 286 & 279.126870362\\
-35 & 260 & 251.214183326\\
-$\vdots$ & $\vdots$ & $\vdots$ \\ 
+50 & 51 & 51.7227726031\\
+51 & 42 & 46.5504953428\\
+52 & 43 & 41.8954458085\\
+53 & 38 & 37.7059012277\\
+54 & 33 & 33.9353111049\\
 55 & 36 & 30.5417799944\\
-56 & 29 & 27.487601995\\
-57 & 28 & 24.7388417955\\
-58 & 26 & 22.2649576159\\
-59 & 31 & 20.0384618543\\
-60 & 9 & 18.0346156689\\
 $\vdots$ & $\vdots$ & $\vdots$ \\ 
+75 & 3 & 3.71316743696\\
+76 & 4 & 3.34185069327\\
+77 & 1 & 3.00766562394\\
+78 & 1 & 2.70689906155\\
 79 & 2 & 2.43620915539\\
 80 & 2 & 2.19258823985\\
-81 & 1 & 2.19258823985\\
-82 & 0 & 2.19258823985\\
-83 & 1 & 2.19258823985\\
-84 & 2 & 2.19258823985\\
-85 & 2 & 2.19258823985\\
-$\vdots$ & $\vdots$ & $\vdots$ \\ 
-106 & 1 & 2.19258823985\\
+81 & 23 & 19.7332941587\\
 \hline
 \end{longtable}
 \end{center}
@@ -201,17 +205,20 @@ $\vdots$ & $\vdots$ & $\vdots$ \\
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
-$\alpha$ & $K_n$ & $\chi^2$ & Résultat\\
+$\alpha$ & $K_{n}$ & $\chi^2_{81, 1 - \alpha}$ & Résultat\\
 \hline
-0.001 & 98.6640480349 & 156.740261033 & True\\
-0.025 & 98.6640480349 & 136.382163482 & True\\
-0.05 & 98.6640480349 & 131.03145825 & True\\
-0.1 & 98.6640480349 & 125.035359232 & True\\
+0.001 & 69.4981721617 & 126.082558333 & True\\
+0.025 & 69.4981721617 & 107.783409665 & True\\
+0.05 & 69.4981721617 & 103.009508712 & True\\
+0.1 & 69.4981721617 & 97.6795807085 & True\\
 \hline
 \end{tabular}
 \end{center}
 \caption{Résultat du test de $\chi^2$}
-\end{figure} 
+\label{result2}
+\end{figure}
+
+Les résultats visibles à la figure \ref{result2} montrent que le test de $\chi^2$ effectués sur les effectifs représentant le test du gap est réussi pour tous les $\alpha$ choisis.
 
 \subsection{Test du poker}
 \subsubsection*{Principe}
