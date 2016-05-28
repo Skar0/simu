@@ -1,7 +1,12 @@
-\documentclass[a4paper,10pt]{article}
+\documentclass[10pt,a4paper]{article}
+\usepackage[top = 1.6cm, left = 3cm, right = 3cm ]{geometry}
 \usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{longtable}
@@ -74,7 +79,7 @@ Dr. Alain Buys
 \newpage
 
 \section{Introduction}
-Le but de ce projet est de montrer le caractère pseudo-aléatoire des décimales de $\pi$. Nous allons montrer dans ce rapport que les 
+	Le but de ce projet est de montrer le caractère pseudo-aléatoire des décimales de $\pi$. Nous allons montrer dans ce rapport que les 
 décimales de $\pi$ suivent une distribution uniforme. Nous étudierons ce caractère pseudo-aléatoire via les tests vu au cours. Nous
 créerons ensuite un générateur de nombres pseudo-aléatoire grâce aux décimales de $\pi$ fournies. Enfin, nous comparerons ce générateur
 avec le générateur intégré à Python.
@@ -95,11 +100,11 @@ Soit $H_0$ = \{\textit{ les décimales de $\pi$ suivent une loi uniforme }\}, co
 \label{khi2histo}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
-\begin{tabular}{|c|c|c|}
+\begin{longtable}{|c|c|c|}
 \hline
-r & eff. observé & eff. théorique \\
+r & eff. observé & eff. théorique\\
 \hline
 1 & 99959 & 10000\\
 2 & 99758 & 10000\\
@@ -112,16 +117,15 @@ r & eff. observé & eff. théorique \\
 9 & 99985 & 10000\\
 10 & 100106 & 10000\\
 \hline
-\end{tabular}
+\end{longtable}
 \end{center}
 \caption{Tableau des effectifs pour chaque classe.}
 \end{figure}
-
-\begin{figure}[h!]
+\begin{figure}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
-$\alpha$ & $K_n$ & $\chi^2$ & Résultat\\
+$\alpha$ & $K_{n}$ & $\chi^2_{9, 1 - \alpha}$ & Résultat\\
 \hline
 0.001 & 5.50908 & 27.8771648713 & True\\
 0.025 & 5.50908 & 19.0227677986 & True\\
@@ -131,9 +135,10 @@ $\alpha$ & $K_n$ & $\chi^2$ & Résultat\\
 \end{tabular}
 \end{center}
 \caption{Résultat du test de $\chi^2$}
+\label{result1}
 \end{figure}
 
-Les résultats obtenus nous indique que le test de $\chi^2$ est réussi pour tous les $\alpha$ choisis.
+Les résultats obtenus nous indiquent que le test de $\chi^2$ est réussi pour tous les $\alpha$ choisis (voir figure \ref{result1}).
 \subsection{Test du gap}
 
 \begin{figure}[H]
