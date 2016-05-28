@@ -3,6 +3,7 @@ import time
 from tools import piLoader
 
 index = []
+counter = 0
 pi_digits = piLoader.piDigits()
 
 def reverse(n):
@@ -17,7 +18,10 @@ def reverse(n):
 
 def next():
     """generates a pseudo random float ϵ [0, 1[ following the 1M digits of pi"""
-    global index
+    global index, counter
+    if counter == 1e6:
+        counter = 0
+        index = []
     if index == []:
         for i in range(16):
             index.append(reverse(int(time.time() * 1e6 % 1e6)))
@@ -28,4 +32,5 @@ def next():
             return acc/1e16
         else:
             return generate_number(i+1, acc + pi_digits[index[i]] * 10 ** (16-(i+1)))
+    counter = counter + 1
     return generate_number(0, 0.)
