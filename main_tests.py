@@ -45,6 +45,7 @@ def poker_test():
     khi = khi2.k(observed_classes,theoretical_classes)
     print latex.table_generator("Nombre de digits differents", [observed_classes], [theoretical_classes])
     print latex.khi2_table_generator([khi], len(observed_classes)), '\n'
+    poker.comparative_histogram(theoretical_classes,observed_classes)
 
 khi2_test()
 gap_test(5)

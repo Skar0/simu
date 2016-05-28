@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import math
-from continuous_tests import khi2
-
+import matplotlib.pyplot as plt
+import numpy as numpy
 # Used to optimise stirling values
+
 known_stirling_values = []
 
 
@@ -76,3 +77,14 @@ def stirling(k,r):
 def dataset(data):
     """Transforms non discrete values ϵ [0,1[ data list into discrete values list ϵ [0,9] """
     return map(lambda x : int(x * 10), data)
+
+def comparative_histogram(theoretical, observed):
+    """Builds a comparative histogram between the theoretical and observed classes obtained by the test"""
+    plt.clf()
+    theo = plt.bar(numpy.arange(len(theoretical)), theoretical, color="darkgreen", width=0.5,linewidth=0)
+    obs = plt.bar(numpy.arange(len(observed)) + 0.5, observed, color="yellowgreen", width=0.5,linewidth=0)
+    plt.xlabel(u'Nombre de chiffres différents dans la séquence')
+    plt.ylabel("Nombre d'occurences")
+    plt.legend((theo, obs), (u'Valeurs théoriques', u'Valeurs observées'),loc=2)
+    plt.axis([0, len(theoretical), 0, max(theoretical) + 5000])
+    plt.savefig("report/poker_histogram.png", bbox_inches='tight')

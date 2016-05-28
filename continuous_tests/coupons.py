@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import math
+
 import matplotlib.pyplot as plt
+import numpy as numpy
+
 from continuous_tests import poker
 
 
@@ -76,11 +79,12 @@ def theoretical(r, d, n):
 def comparative_histogram(theoretical, observed):
     """Builds a comparative histogram between the theoretical and observed classes obtained by the test"""
     plt.clf()
-    plt.bar(range(len(theoretical)), theoretical, color="blue", linewidth=0, width=0.6, alpha=0.5)
-    plt.bar(range(len(observed)), observed, color="red", linewidth=0, width=0.6, alpha=0.5)
+    theo = plt.bar(numpy.arange(len(theoretical)), theoretical, color="darkgreen", width=0.5,linewidth=0)
+    obs = plt.bar(numpy.arange(len(observed)) + 0.5, observed, color="yellowgreen", width=0.5,linewidth=0)
     plt.xlabel('Longueur de la sequence')
     plt.ylabel("Nombre d'occurences")
-    plt.axis([0, len(theoretical), 0, max(theoretical) + 1000])
+    plt.legend((theo, obs), (u'Longueurs théoriques', u'Longueurs observées'))
+    plt.axis([0, len(theoretical), 0, max(theoretical) + 100])
     plt.savefig("report/coupons_histogram.png", bbox_inches='tight')
 
 
