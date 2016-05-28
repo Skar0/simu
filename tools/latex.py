@@ -38,8 +38,8 @@ def table_generator(r, observed, theoretical, beginning=1, names= ['']):
     tabular += "\\end{center}\n\\caption{Tableau des effectifs pour chaque classe.}\n\\end{figure}"
     return tabular
 
-def foreach(predicate, l):
-    """returns true if the predicate is verified for each element of l"""
+def forall(predicate, l):
+    """returns true if the predicate is verified for all elements of l"""
     return len(filter(predicate, l)) == len(l)
 
 def khi2_table_generator(K, n, names = ['n']):
@@ -60,7 +60,7 @@ def khi2_table_generator(K, n, names = ['n']):
         tabular += str(a) + " & "
         for i in range(len(K)):
             tabular += str(K[i]) + " & "
-        tabular += str(khi2) + " & " + str(foreach(lambda k: k < khi2, K))
+        tabular += str(khi2) + " & " + str(forall(lambda k: k < khi2, K))
 
         tabular += "\\\\\n"
     tabular += "\hline\n\end{tabular}\n"
