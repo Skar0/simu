@@ -89,7 +89,7 @@ avec le générateur intégré à Python.
 Nous allons maintenant étudier le caractère pseudo-aléatoire de $\pi$ grâce à plusieurs tests statistiques. \`A l'aide de séquences générées à partir de modèles faisant intervenir une loi uniforme, nous pourrons montrer le caractère pseudo-aléatoire des décimales à conditions que celles-ci aient les mêmes propriétés que les séquences.
 
 \subsection{Test de Khi2}
-Le test de $\chi^2$ va nous permettre de tester l'adéquation des décimales de pi avec les familles de lois de probabilités que nous allons traiter par la suite. Pour se faire, on génère des séquences théoriques selon la loi de probabilité et on les réparti ainsi que les décimales de $\pi$ en classes. Les effectifs de chaque classe sont comparés aux effectifs théoriques au moyen de la formule ci-dessous :
+Le test de $\chi^2$ va nous permettre de tester l'adéquation des décimales de pi avec les familles de lois de probabilités que nous allons traiter par la suite. Pour se faire, on génère des séquences théoriques selon la loi de probabilité et on les répartis, ainsi que les décimales de $\pi$, en classes. Les effectifs de chaque classe sont comparés aux effectifs théoriques au moyen de l'équation ci-dessous :
 \[ K = \displaystyle\sum_{i=1}^n (\frac{n_i-Np_i}{\sqrt{Np_i}})^2\]
 où $n_i$ est l'effectif observé de la classe $i$ et $Np_i$, l'effectif théorique (loi uniforme) de la classe $i$. On soumet le test à une probabilité $\alpha$ de rejeter l'hypothèse nulle $H_0$. Celle-ci est acceptée si $K \leq \chi_x^2$ où $x$ est le degré de liberté. \\Celui-ci s'obtient facilement : $x$ = nombre de classes - 1. \\
 
@@ -141,7 +141,7 @@ $\alpha$ & $K_{n}$ & $\chi^2_{9, 1 - \alpha}$ & Résultat\\
 Les résultats obtenus nous indiquent que le test de $\chi^2$ est réussi pour tous les $\alpha$ choisis (voir figure \ref{result1}).
 \subsection{Test du gap}
 
-Le test de Gap va nous permettre de générer des classes selon une intervalle $[a, b]$ choisie préalablement. Le but est de compter les nombres compris entre 2 valeurs appartenant à cette intervalle, c'est ce qui représente la longueur d'un gap. Une longueur de gap correspond à une classe.\\
+Le test de Gap va nous permettre de générer des classes selon une intervalle $[a, b]$ choisie préalablement. Le but est de compter les nombres compris entre 2 valeurs successives appartenant à cette intervalle, c'est ce qui représente la longueur d'un gap. Une longueur de gap correspond à une classe.\\
 Afin d'adapter le test de Gap aux décimales de $\pi$, et donc à un jeu de données à valeur \textbf{discrètes}, on considère qu'une longueur de gap survient entre la récurrence d'un digit fixé au préalable.\\
 
 Soient $u_1, u_2, u_3, ..., u_i, ..., u_{1e6}$, les décimales de $\pi$, avec $0 \leq u_i \leq 9$. Après avoir sélectionné un digit $\delta$, on va sélectionner les décimales $u_j$ telles que $u_j = \delta$. Ces $u_j$ ont une probabilité $P(x=\delta) = 0.1$. On calcule ensuite les distances entre chaque occurrence de $\delta$.\\ Soit $l_n$, la probabilité d'une longueur de gap $n$, tel que $0 \leq n \leq i$.
@@ -221,8 +221,10 @@ $\alpha$ & $K_{n}$ & $\chi^2_{81, 1 - \alpha}$ & Résultat\\
 Les résultats visibles à la figure \ref{result2} montrent que le test de $\chi^2$ effectués sur les effectifs représentant le test du gap est réussi pour tous les $\alpha$ choisis.
 
 \subsection{Test du poker}
+
 Le test du poker consiste en la comparaison entre le fréquences théoriques des mains au poker avec les
 fréquences observées dans notre jeu de données. Pour transformer nos données en une main de poker, nous allons d'abord transformer les $1 000 000$ de décimales de $\pi$ en $200 000$ nombres de $5$ chiffres. Pour ce faire, nous allons simplement parcourir la liste des décimales fournie et y prendre 5 chiffres à la fois pour créer des nombres.\newline \newline
+
 Nous allons ensuite compter le nombre de chiffres différents contenus dans ces nombres, ce qui nous donnera nos classes de la manière
 suivante : \\
 \begin{itemize}
@@ -327,5 +329,10 @@ Nous remarquons que les décimales de $\pi$ fournies réussissent le test de Pok
 \label{couponshisto}
 \end{figure}
 \section{Générateur de nombres pseudo-aléatoire}
+Nous allons maintenant expliquer comment générer des nombres aléatoires dans $[0, 1[$ à partir des décimales de $\pi$ et cela de manière uniforme. Ensuite, nous le comparerons avec le générateur inclus dans Python.
+\subsection{Principe}
+Le moment précis auquel on demande de générer un nombre est le seul véritable caractère aléatoire que nous pourrons utiliser pour créer le générateur. On utilise donc le temps en millisecondes écoulé depuis le 1$^{er}$ janvier 1970. Afin d'obtenir dans un intervalle de temps très petit des valeurs complètement différentes, on ne retient que les 6 premiers chiffres après la virgule du nombre obtenu et on inverse l'ordre de ses chiffres (simplement via des opérations de modulo et de divisions entières). Le nombre résultant correspond à un indice dans le tableau des décimales de $\pi$. On charge de cette façon 16 indices, ce qui va correspondre à 16 digits. Ces 16 chiffres forment un nombre $x \in [0, 1e16[$. Il suffit de le diviser par $1e16$ et on obtient un nombre à 16 chiffres après la virgule dans l'intervalle $[0, 1[$. Si on veut récupérer un autre nombre aléatoire, il suffit d'ajouter 1 à tous les indices récupérés (modulo 1e6) à l'étape précédente et recommencer le processus. En résumé, on a donc 16 compteurs, qu'on itère de 1 à chaque requête de génération de nombre aléatoire, qui correspondent chacun à un indice dans le tableau des décimales de $\pi$, à partir desquels on obtient 16 digits qui forment un nombre aléatoire. Notons qu'après 1 million d'itérations, de par l'incrémentation des compteurs, des nombres précédemment générés vont apparaitre car on aura parcouru l'entièreté des décimales de $\pi$. Pour palier à cela, on réinitialise le générateur et ses compteurs à l'aide du temps UNIX.
 
+\subsection{Test du poker}
+Afin de comparer les deux générateur en utilisant le test du poker nous allons prendre les nombres aléatoires $\in [0,1[$, les multiplier par 10 et prendre leur partie entière. Nous obtenons ainsi des nombres $\in [0,1,2,3,4,5,6,7,8,9]$. Nous pouvons ensuite effectuer le test du poker tel que décrit précédemment sur les données ainsi transformées. Effectuer le test sur ces données transformées est équivalent à diviser $[0,1]$ en 10 intervalles, car 0 correspondra à l'intervalle $[0,0.1[$ 1 à l'intervalle $[0.1,0.2[$ et ce jusqu'à 9 qui correspondra à $[0.9,1[$.\\
 \end{document}
