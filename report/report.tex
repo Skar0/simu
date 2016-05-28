@@ -76,15 +76,16 @@ Dr. Alain Buys
 \section{Introduction}
 Le but de ce projet est de montrer le caractère pseudo-aléatoire des décimales de $\pi$. Nous allons montrer dans ce rapport que les 
 décimales de $\pi$ suivent une distribution uniforme. Nous étudierons ce caractère pseudo-aléatoire via les tests vu au cours. Nous
-crérons ensuite un générateur de nombres pseudo-aléatoire grâce aux décimales de $\pi$ fournies. Enfn, nous comparerons ce générateur
+créerons ensuite un générateur de nombres pseudo-aléatoire grâce aux décimales de $\pi$ fournies. Enfin, nous comparerons ce générateur
 avec le générateur intégré à Python.
 
 \section{Tests sur les décimales de $\pi$}
 
-Nous allons maintenant étudier le caractère pseudo-aléatoire de $\pi$ grâce à plusieurs tests vu au cours.
+Nous allons maintenant étudier le caractère pseudo-aléatoire de $\pi$ grâce à plusieurs tests statistiques vus au cours. \`A l'aide de séquences générées à partir de lois uniformes, nous pourrons montrer le caractère pseudo-aléatoire des décimales à conditions que celles-ci aient les mêmes propriétés que les séquences.
 
 \subsection{Test de Khi2}
-
+Le test de $\chi^2$ va nous permettre de tester l'adéquation des décimales de pi avec les familles de lois de probabilités que nous allons traiter par la suite. Pour se faire, on génère des séquences théoriques selon la loi de probabilité et on les réparti ainsi que les décimales de $\pi$ en classes. Les effectifs de chaque classe sont comparés aux effectifs théoriques au moyen de la formule ci-dessous :
+\[ K = \displaystyle\sum_{i=1}^n (\frac{n_i-Np_i}{\sqrt{Np_i}})^2\]
 \begin{figure}[h!]
 \makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{khi2_histopi.png}}
 \caption{Occurrence des digits de pi}
