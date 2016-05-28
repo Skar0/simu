@@ -79,12 +79,12 @@ def theoretical(r, d, n):
 def comparative_histogram(theoretical, observed):
     """Builds a comparative histogram between the theoretical and observed classes obtained by the test"""
     plt.clf()
-    theo = plt.bar(numpy.arange(len(theoretical)), theoretical, color="blue", width=0.5,linewidth=0)
-    obs = plt.bar(numpy.arange(len(observed)) + 0.5, observed, color="red", width=0.5,linewidth=0)
+    theo = plt.bar(numpy.arange(len(theoretical)), theoretical, color="darkgreen", width=0.5,linewidth=0)
+    obs = plt.bar(numpy.arange(len(observed)) + 0.5, observed, color="yellowgreen", width=0.5,linewidth=0)
     plt.xlabel('Longueur de la sequence')
     plt.ylabel("Nombre d'occurences")
     plt.legend((theo, obs), (u'Longueurs théoriques', u'Longueurs observées'))
-    plt.axis([0, len(theoretical), 0, max(theoretical) + 1000])
+    plt.axis([0, len(theoretical), 0, max(theoretical) + 100])
     plt.savefig("report/coupons_histogram.png", bbox_inches='tight')
 
 
