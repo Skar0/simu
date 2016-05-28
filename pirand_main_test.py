@@ -22,12 +22,14 @@ def comparative_histogram():
     plt.axis([0, 10, 0, 115000])
     plt.savefig("assets/test.png", bbox_inches='tight')
 
+
 def khi2_test():
     print '%' + '-' * 69 + '\n' + '% KHI2 TEST\n' + '%' + '-' * 69 + '\n'
     dataset1 = khi2.dataset(pirand_data)
     dataset2 = khi2.dataset(python_data)
     print latex.table_generator('classes', [dataset1, dataset2], [[1e5]*10], 1, ["$\pi$ rand", "Python rand"])
     print latex.khi2_table_generator([khi2.k(dataset1), khi2.k(dataset2)], 10, ["\pi", "Python"])
+    print '\n'
 
 
 def gap_test():
@@ -37,6 +39,8 @@ def gap_test():
     print latex.table_generator("longueur du gap", datasets, theoretical_values, 0, ["$\pi$ rand", "Python rand"])
     khi_gaps = [khi2.k(datasets[0], theoretical_values[0]), khi2.k(datasets[1], theoretical_values[0])]
     print latex.khi2_table_generator(khi_gaps, len(datasets[0]), ["\pi", "Python"])
+    print '\n'
+
 
 def poker_test():
     print '%' + '-' * 69 + '\n' + '% POKER TEST\n' + '%' + '-' * 69 + '\n'
@@ -47,6 +51,7 @@ def poker_test():
     khi_pirand = khi2.k(dataset1,theoretical_dataset)
     khi_python = khi2.k(dataset2,theoretical_dataset)
     print latex.khi2_table_generator([khi_pirand,khi_python],len(dataset1),["\piRand", "Python"])
+    print '\n'
 
 
 def coupons_test():
@@ -67,9 +72,11 @@ def coupons_test():
     khi_python = khi2.k(python_dataset[10:],theoretical_dataset_python[10:])
 
     print latex.khi2_table_generator([khi_pirand,khi_python],len(pirand_dataset[10:]),["\piRand", "Python"])
+    print '\n'
 
 
 def kolmogorov_test():
+    print '%' + '-' * 69 + '\n' + '% KOLMOGOROV TEST\n' + '%' + '-' * 69 + '\n'
     kolmo_100 = [kolmogorov.kolmo(pirand_data[:100], kolmogorov.theoretical_distribution),
                  kolmogorov.kolmo(python_data[:100], kolmogorov.theoretical_distribution)]
     kolmo_1000 = [kolmogorov.kolmo(pirand_data[:1000], kolmogorov.theoretical_distribution),
@@ -85,7 +92,7 @@ def kolmogorov_test():
     kolmo_sizes = [100,1000]
 
     print latex.kolmogorov_table_generator(kolmo_values,kolmo_sizes)
-
+    print '\n'
 
 
 khi2_test()
