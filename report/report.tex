@@ -86,6 +86,9 @@ Nous allons maintenant étudier le caractère pseudo-aléatoire de $\pi$ grâce 
 \subsection{Test de Khi2}
 Le test de $\chi^2$ va nous permettre de tester l'adéquation des décimales de pi avec les familles de lois de probabilités que nous allons traiter par la suite. Pour se faire, on génère des séquences théoriques selon la loi de probabilité et on les réparti ainsi que les décimales de $\pi$ en classes. Les effectifs de chaque classe sont comparés aux effectifs théoriques au moyen de la formule ci-dessous :
 \[ K = \displaystyle\sum_{i=1}^n (\frac{n_i-Np_i}{\sqrt{Np_i}})^2\]
+où $n_i$ est l'effectif observé de la classe $i$ et $Np_i$, l'effectif théorique (loi uniforme) de la classe $i$. On soumet le test à une probabilité $\alpha$ de rejeter l'hypothèse nulle $H_0$. Celle-ci est acceptée si $K \leq \chi_x^2$ où $x$ est le degré de liberté. \\Celui-ci s'obtient facilement : $x$ = nombre de classes - 1. \\
+
+Soit $H_0$ = \{\textit{ les décimales de $\pi$ suivent une loi uniforme }\}, considérons une classe par chiffre, on a donc que le degré de liberté est $x = 10 - 1 = 9 $. On considère donc que l'effectif d'une classe est le nombre d'occurrence de ce même digit parmi les $1e6$ décimales présentes dans le fichier fourni. L'effectif théorique que l'on choisit est simplement une moyenne pour chaque classe.
 \begin{figure}[h!]
 \makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{khi2_histopi.png}}
 \caption{Occurrence des digits de pi}
@@ -130,6 +133,7 @@ $\alpha$ & $K_n$ & $\chi^2$ & Résultat\\
 \caption{Résultat du test de $\chi^2$}
 \end{figure}
 
+Les résultats obtenus nous indique que le test de $\chi^2$ est réussi pour tous les $\alpha$ choisis.
 \subsection{Test du gap}
 
 \begin{figure}[H]
