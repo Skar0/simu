@@ -7,7 +7,7 @@ data = piLoader.piDigits()
 def khi2_test():
     print '%' + '-' * 69 + '\n' + '% KHI2 TEST\n' + '%' + '-' * 69 + '\n'
     dataset = khi2.histopi(data)
-    print latex.table_generator("r", [dataset], [10 * [10000]])
+    print latex.table_generator("r", [dataset], [10 * [100000]])
     k = khi2.k(dataset)
     print latex.khi2_table_generator([k], len(dataset)), '\n'
 
