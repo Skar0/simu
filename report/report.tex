@@ -639,5 +639,11 @@ Nous remarquons que le générateur de python et le notre passent le test pour d
 \section{Conclusion}
 \`A première vue, en se fiant aux tests que l'on a effectué à la section précédente, on aurait tendance à dire que le générateur se basant sur les décimales de $\pi$ semble meilleur. Cependant, ce générateur nécessite, lors de la génération du premier nombre (et donc son initialisation), de lire le fichier contenant les 1 million de décimales de $\pi$ afin de les charger en mémoire, ce qui est très lent et coûteux en mémoire.\\
 Le générateur de Python ne correspond pas aussi fidèlement (mais a tout de même le mérite de passer les tests) à la générations de nombre suivant lois normales et continues testées, mais génère ses nombres très rapidement et est beaucoup moins coûteux en mémoire.
-
+\newpage
+\section*{Annexe}
+\subsection{Code source}
+\subsubsection{Tests}
+Tous les tests référencés dans ce rapport sont implémentés dans le module $tests$. Le programme qui lance les tests sont \textit{main\_tests.py} pour ceux de la première section et \textit{pirand\_main\_tests.py} pour ceux de la deuxième.
+\subsubsection{Générateur de nombres pseudo-aléatoires}
+Le générateur se nomme \textit{pirand.py} et nécessite le programme python \textit{piLoader} se situant dans le module \textit{tools}. Après avoir importé le générateur dans un programme python avec la commande \textit{import pirand}, l'appel de \textit{pirand.next()} génèrera un nombre aléatoire comme expliqué à la section précédente.
 \end{document}
