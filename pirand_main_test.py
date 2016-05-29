@@ -5,6 +5,8 @@ from tools import piLoader, latex
 import pirand
 import random
 from continuous_tests import poker, khi2, gap, coupons, kolmogorov
+import matplotlib.pyplot as plt
+import numpy as numpy
 
 pirand_data = [pirand.next() for x in range(int(1e6))]
 python_data = [random.random() for x in range(int(1e6))]
@@ -53,6 +55,16 @@ def poker_test():
     print latex.khi2_table_generator([khi_pirand,khi_python],len(dataset1),["\piRand", "Python"])
     print '\n'
 
+    plt.clf()
+    theo = plt.bar(numpy.arange(len(theoretical_dataset)), theoretical_dataset, color="darkgreen", width=0.33,linewidth=0)
+    obs1 = plt.bar(numpy.arange(len(dataset1)) + 0.33, dataset1, color="lightblue", width=0.33,linewidth=0)
+    obs2 = plt.bar(numpy.arange(len(dataset2)) + 0.66, dataset2, color="red", width=0.33, linewidth=0)
+    plt.xlabel(u'Nombre de chiffres différents dans la séquence')
+    plt.ylabel("Nombre d'occurences")
+    plt.legend((theo, obs1,obs2), (u'Valeurs théoriques', u'Valeurs observées $\pi Rand$ ',u'Valeurs observées python '),loc=2)
+    plt.axis([0, len(theoretical_dataset), 0, max(theoretical_dataset) + 5000])
+    plt.savefig("report/poker_generator_histogram.png", bbox_inches='tight')
+
 
 def coupons_test():
     print '%' + '-' * 69 + '\n' + '% COUPONS TEST\n' + '%' + '-' * 69 + '\n'
@@ -72,6 +84,8 @@ def coupons_test():
     khi_python = khi2.k(python_dataset[10:],theoretical_dataset_python[10:])
 
     print latex.khi2_table_generator([khi_pirand,khi_python],len(pirand_dataset[10:]),["\piRand", "Python"])
+    coupons.comparative_histogram(theoretical_dataset_pirand,pirand_dataset,"couponshistocomp2")
+    coupons.comparative_histogram(theoretical_dataset_python,python_dataset,"couponshistocomp1")
     print '\n'
 
 
