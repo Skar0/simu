@@ -97,15 +97,15 @@ def kolmogorov_test():
                  kolmogorov.kolmo(python_data[:100], kolmogorov.theoretical_distribution)]
     kolmo_1000 = [kolmogorov.kolmo(pirand_data[:1000], kolmogorov.theoretical_distribution),
                   kolmogorov.kolmo(python_data[:1000], kolmogorov.theoretical_distribution)]
-    """
     kolmo_10000 = [kolmogorov.kolmo(pirand_data[:10000], kolmogorov.theoretical_distribution),
                    kolmogorov.kolmo(python_data[:10000], kolmogorov.theoretical_distribution)]
+    """
     kolmo_100000 = [kolmogorov.kolmo(pirand_data[:100000], kolmogorov.theoretical_distribution),
                     kolmogorov.kolmo(python_data[:100000], kolmogorov.theoretical_distribution)]
     """
-    kolmo_values = [kolmo_100,kolmo_1000]
+    kolmo_values = [kolmo_100,kolmo_1000,kolmo_10000]
 
-    kolmo_sizes = [100,1000]
+    kolmo_sizes = [100,1000,10000]
 
     print latex.kolmogorov_table_generator(kolmo_values,kolmo_sizes)
     print '\n'

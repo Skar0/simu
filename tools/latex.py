@@ -71,15 +71,14 @@ def khi2_table_generator(K, n, names = ['n']):
 def kolmogorov_table_generator(results, sizes):
     alpha = [0.01, 0.05, 0.10, 0.15, 0.2]
     values_d_alpha = [1.63, 1.36, 1.22, 1.14, 1.07]
-    tabular = "\\begin{tabular}{|c" + '|c' * 7 +"|c|c|}\n"
-    tabular += "\\hline\n $n$ & $D_{n} (pirand)$ & $D_{n} (python)$ & $D_{\\alpha = 0.01}$ & $D_{\\alpha = 0.05}$ &" \
-               "$D_{\\alpha = 0.1}$ & $D_{\\alpha = 0.15}$ & $D_{\\alpha = 0.2}$ & Res pirand & Res python\\\\ \n"
+    tabular = "\\begin{tabular}{|c" + '|c' * 6+"|}\n"
+    tabular += "\\hline\n $n$ & $D_{n} (pirand)$ & $D_{n} (python)$ & $\\alpha$ & $D_{\\alpha = 0.01}$ & Res pirand & Res python\\\\ \n"
 
-    for i in range(0,len(sizes)):
-        tabular +="\\hline\n"+str(sizes[i])+" & "+str(round(results[i][0],5))+" & "+str(round(results[i][1],5))+" & "+ \
-                  str(round(values_d_alpha[0]/math.sqrt(sizes[i]),5))+" & "+str(round(values_d_alpha[1]/math.sqrt(sizes[i]),5)) + " & "+ \
-                  str(round(values_d_alpha[2] / math.sqrt(sizes[i]),5)) + " & " + str(round(values_d_alpha[3] / math.sqrt(sizes[i]),5)) + \
-            " & "+str(round(values_d_alpha[4]/math.sqrt(sizes[i]),5))+" & "+str((results[i][0] < values_d_alpha[0]/math.sqrt(sizes[i])))+ \
-            " & "+str((results[i][1] < values_d_alpha[0]/math.sqrt(sizes[i])))+"\\\\ \n"
+    for i in range(0,len(results)):
+        tabular+="\\hline \n"+str(sizes[i])+"&"+str(round(results[i][0],5))+"&"+str(round(results[i][1],5))+" & "+ str(alpha[0])+"&"+str(round(values_d_alpha[0]/math.sqrt(sizes[i]),5))+" & "+str((results[i][0] < values_d_alpha[0]/math.sqrt(sizes[i])))+" & "+str((results[i][1] < values_d_alpha[0]/math.sqrt(sizes[i])))+"\\\\"
+        tabular+="\\hline \n"+str(sizes[i])+"&"+str(round(results[i][0],5))+"&"+str(round(results[i][1],5))+" & "+ str(alpha[1])+"&"+str(round(values_d_alpha[1]/math.sqrt(sizes[i]),5))+" & "+str((results[i][0] < values_d_alpha[1]/math.sqrt(sizes[i])))+" & "+str((results[i][1] < values_d_alpha[1]/math.sqrt(sizes[i])))+"\\\\"
+        tabular+="\\hline \n"+str(sizes[i])+"&"+str(round(results[i][0],5))+"&"+str(round(results[i][1],5))+" & "+ str(alpha[2])+"&"+str(round(values_d_alpha[2]/math.sqrt(sizes[i]),5))+" & "+str((results[i][0] < values_d_alpha[2]/math.sqrt(sizes[i])))+" & "+str((results[i][1] < values_d_alpha[2]/math.sqrt(sizes[i])))+"\\\\"
+        tabular+="\\hline \n"+str(sizes[i])+"&"+str(round(results[i][0],5))+"&"+str(round(results[i][1],5))+" & "+ str(alpha[3])+"&"+str(round(values_d_alpha[3]/math.sqrt(sizes[i]),5))+" & "+str((results[i][0] < values_d_alpha[3]/math.sqrt(sizes[i])))+" & "+str((results[i][1] < values_d_alpha[3]/math.sqrt(sizes[i])))+"\\\\"
+        tabular+="\\hline \n"+str(sizes[i])+"&"+str(round(results[i][0],5))+"&"+str(round(results[i][1],5))+" & "+ str(alpha[4])+"&"+str(round(values_d_alpha[4]/math.sqrt(sizes[i]),5))+" & "+str((results[i][0] < values_d_alpha[4]/math.sqrt(sizes[i])))+" & "+str((results[i][1] < values_d_alpha[4]/math.sqrt(sizes[i])))+"\\\\"
     tabular += "\hline\n\end{tabular}\n"
     return tabular
