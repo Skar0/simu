@@ -323,11 +323,102 @@ $\alpha$ & $K_{n}$ & $\chi^2_{4, 1 - \alpha}$ & Résultat\\
 
 Nous remarquons que les décimales de $\pi$ fournies réussissent le test de Poker pour tous les $\alpha$ choisis.
 \subsection{Test du collectionneur de coupons}
+Le test du collectionneur de coupons s'effectue en créant des séquences de chiffres à partir de la liste des décimales de $\pi$ On augmente la séquence d'un chiffre tant qu'elle ne contient pas tous les chiffres possibles. Une fois que tous les chiffres sont contenus dans la séquence, la taille de celle-ci est sauvée et devient sa classe. Une autre séquence est alors construite. Ce procédé continue tant qu'il reste des chiffres dans la liste de décimales fournie.\newline
+
+Nous pouvons calculer le nombre théorique d'occurrences pour chaque longueur de séquence de la manière suivante :
+
+Il est tout d'abord logique que des séquences de longueur strictement inférieure à 10 ne seront jamais observées. En effet il est impossible que tous les chiffres de 1 à 9 soient contenus dans une telle séquence. \newline
+Il est possible de calculer la probabilité $S_r$ de contenir tous les chiffres dans une séquence de longueur $r$ avec la formule suivante
+\begin{equation*}
+S_r = 
+\begin{Bmatrix}
+r-1\\
+d-1
+\end{Bmatrix}
+\frac{d!}{d^r}
+\end{equation*}
+Avec $r$ la taille de la séquence et $d$ le nombre de chiffres différents voulus dans celle-ci.\newline
+Il est aussi possible de calculer le nombre d'occurrences pour des séquences de longueur $t>r$. La probabilité pour qu'on ait les 10 chiffres dans une séquence de taille supérieure à un certain $t$ est 
+
+\begin{equation*}
+1- 
+\begin{Bmatrix}
+t-1\\
+d
+\end{Bmatrix}
+\frac{d!}{d^t-1}
+\end{equation*}
+Pour obtenir les nombres d'occurrences théoriques, nous avons multiplié ces probabilités par le nombre de séquences crées par le test.\newline
+ 
+La figure \ref{couponshisto} présente les nombres d'occurrences théoriques et les nombres d'occurrences observées pour des tailles de séquence allant de 0 à 100. Nous avons remarqués que pour des tailles supérieures ou égales à 100, le nombre d'occurrence pour les différentes tailles était très petit voir nul pour certaines tailles. Nous avons alors décidés de nous limiter à des tailles strictement inférieures à 100 tout en mettant le nombre de séquences de taille supérieure ou égales à 100 dans une classe spéciale et en la comparant au nombre d'occurrence théorique calculés avec la formule présentée ci-avant. Ceci explique que les deux barres les plus à droite sur le graphique ont un nombre d'occurrences plus élevés.
 \begin{figure}[H]
 \makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{coupons_histogram.png}}
 \caption{Comparaison des résultats du test du collectionneur de coupons}
 \label{couponshisto}
 \end{figure}
+Le tableau suivant présente les résultats pour le test du collectionneur de coupons : 
+
+\begin{figure}[H]
+\begin{center}
+\begin{longtable}{|c|c|c|}
+\hline
+longueur de la sequence & eff. observé & eff. théorique\\
+\hline
+1 & 0 & 0 \\
+2 & 0 & 0 \\
+3 & 0 & 0 \\
+4 & 0 & 0 \\
+5 & 0 & 0 \\
+6 & 0 & 0 \\
+7 & 0 & 0 \\
+8 & 0 & 0 \\
+9 & 0 &0\\
+10 & 12 & 12.39706944\\
+11 & 62 & 55.78681248\\
+12 & 154 & 143.186152032\\
+13& 265 & 276.144721776\\
+14& 496 & 445.677125782\\
+15& 645 & 636.605631934\\
+16& 869 & 832.196551932\\
+17& 1008 & 1017.53193425\\
+18& 1150 & 1181.29471772\\
+19 & 1341 & 1316.26375399\\
+20 & 1354 & 1418.98670105\\
+$\vdots$ & $\vdots$ & $\vdots$ \\ 
+90 & 0 & 2.89087837644\\
+91 & 1 & 2.60186344817\\
+92 & 4 & 2.34173543126\\
+93 & 4 & 2.10760855074\\
+94& 0 & 1.89688502594\\
+95 & 1 & 1.70722638771\\
+96 & 1 & 1.53652764053\\
+97 & 4 & 1.38289398981\\
+98 & 0 & 1.24461988155\\
+99 & 2 & 1.120170126\\
+100 & 12 & 9.07385754262\\
+\hline
+\end{longtable}
+\end{center}
+\caption{Tableau des effectifs pour chaque classe.}
+\end{figure}
+
+Le tableau suivant nous donne le résultat du test de $chi^2$ utilisé pour comparer nos observations avec les effectifs théoriques. Nous remarquons que le test est réussi pour tous les $\alpha$ donnés.
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\alpha$ & $K_{n}$ & $\chi^2_{100, 1 - \alpha}$ & Résultat\\
+\hline
+0.001 & 79.735983847 & 149.449252779 & True\\
+0.025 & 79.735983847 & 129.561197186 & True\\
+0.05 & 79.735983847 & 124.342113404 & True\\
+0.1 & 79.735983847 & 118.498003811 & True\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Résultat du test de $\chi^2$}
+\end{figure} 
+
 \section{Générateur de nombres pseudo-aléatoire}
 Nous allons maintenant expliquer comment générer des nombres aléatoires dans $[0, 1[$ à partir des décimales de $\pi$ et cela de manière uniforme. Ensuite, nous le comparerons avec le générateur inclus dans Python.
 \subsection{Principe}
@@ -335,4 +426,40 @@ Le moment précis auquel on demande de générer un nombre est le seul véritabl
 
 \subsection{Test du poker}
 Afin de comparer les deux générateur en utilisant le test du poker nous allons prendre les nombres aléatoires $\in [0,1[$, les multiplier par 10 et prendre leur partie entière. Nous obtenons ainsi des nombres $\in [0,1,2,3,4,5,6,7,8,9]$. Nous pouvons ensuite effectuer le test du poker tel que décrit précédemment sur les données ainsi transformées. Effectuer le test sur ces données transformées est équivalent à diviser $[0,1]$ en 10 intervalles, car 0 correspondra à l'intervalle $[0,0.1[$ 1 à l'intervalle $[0.1,0.2[$ et ce jusqu'à 9 qui correspondra à $[0.9,1[$.\\
+\begin{figure}[H]
+\begin{center}
+\begin{longtable}{|c|c|c|c|c|}
+\hline
+classes & eff. observé ($\pi$Rand) & eff. observé (Python rand) & eff. théorique\\
+\hline
+Tous les chiffres identiques & 13 & 19 & 20.0 \\
+4 chiffres identiques & 2644 & 2729 & 2700.0 \\
+3 chiffres identiques  & 36172 & 35923 & 36000.0\\
+2 chiffres identiques & 100670 & 100805 & 100800.0\\
+Tous les chiffres différents & 60501 & 60524 & 60480.0\\
+\hline
+\end{longtable}
+\end{center}
+\caption{Tableau des effectifs pour chaque classe.}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$\alpha$ & $K_{\pi Rand}$ & $K_{Python}$ & $\chi^2_{4, 1 - \alpha}$ & Résultat\\
+\hline
+0.001 & 4.60820965608 & 0.55843452381 & 18.4668269529 & True\\
+0.025 & 4.60820965608 & 0.55843452381 & 11.1432867819 & True\\
+0.05 & 4.60820965608 & 0.55843452381 & 9.48772903678 & True\\
+0.1 & 4.60820965608 & 0.55843452381 & 7.77944033973 & True\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Résultat du test de $\chi^2$}
+\end{figure}
+
+Nous remarquons que le générateur de python suit mieux les effectifs théoriques pour le test du poker. Nous en concluons que le générateur de python est meilleur pour ce test.
+
+\subsection{Test du collectionneur de coupons}
 \end{document}
