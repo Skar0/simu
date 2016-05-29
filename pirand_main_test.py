@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
-
+import numpy
 from tools import piLoader, latex
 import pirand
 import random
@@ -11,16 +11,18 @@ python_data = [random.random() for x in range(int(1e6))]
 
 
 def comparative_histogram():
-    piFile = piLoader.piDigits()
-    piRand = map(lambda x: x*10, pirand_data)
-
-    """Creates a discrete dataset from datas and draw the linked histogram"""
-    plt.hist(piFile, bins=(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), color="lightblue", linewidth=0, width=1)
-    plt.hist(piRand, bins=(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), color="red",linewidth=0, width=0.5)
-    plt.xlabel('pi digits')
-    plt.ylabel('ocurence')
-    plt.axis([0, 10, 0, 115000])
-    plt.savefig("assets/test.png", bbox_inches='tight')
+    """Create an histogram of pirand_data and python_data"""
+    dataset = khi2.dataset(pirand_data)
+    dataset2 =  khi2.dataset(python_data)
+    fig, ax = plt.subplots()
+    pirand_observed = ax.bar(map(lambda x: x * 0.1 - 0.04, range(10)), dataset, color="firebrick", width=0.04)
+    python_observed = ax.bar(map(lambda x: x * 0.1, range(10)), dataset2, color="orangered", width=0.04)
+    plt.legend([pirand_observed, python_observed], ["generateur pirand", "generateur python"])
+    plt.xlabel('classe')
+    plt.ylabel('occurrence')
+    ax.set_xticklabels(('???', '[0.0, 0.1[', '[0.2, 0.3[', '[0.4, 0.5[', '[0.6, 0.7[', '[0.8, 0.9['))
+    plt.axis([-0.07, 0.97, 0, 130000])
+    plt.savefig("report/comparative_histogram.png", bbox_inches='tight')
 
 
 def khi2_test():
@@ -95,6 +97,7 @@ def kolmogorov_test():
     print '\n'
 
 
+comparative_histogram()
 khi2_test()
 gap_test()
 poker_test()
