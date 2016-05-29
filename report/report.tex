@@ -444,27 +444,28 @@ Le tableau suivant reprend les valeur observées et les valeurs théoriques pour
 \hline
 classes & eff. observé ($\pi$Rand) & eff. observé (Python rand) & eff. théorique\\
 \hline
-Tous les chiffres identiques & 13 & 19 & 20.0 \\
-4 chiffres identiques & 2644 & 2729 & 2700.0 \\
-3 chiffres identiques  & 36172 & 35923 & 36000.0\\
-2 chiffres identiques & 100670 & 100805 & 100800.0\\
-Tous les chiffres différents & 60501 & 60524 & 60480.0\\
+
+
+Tous les chiffres identiques  & 25 & 28 & 20.0\\
+4 chiffres identiques & 2721 & 2640 & 2700.0\\
+3 chiffres identiques & 36136 & 36014 & 36000.0\\
+2 chiffres identiques & 100678 & 100875 & 100800.0\\
+Tous les chiffres différents  & 60440 & 60443 & 60480.0\\
 \hline
 \end{longtable}
 \end{center}
 \caption{Tableau des effectifs pour chaque classe.}
 \end{figure}
-
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 $\alpha$ & $K_{\pi Rand}$ & $K_{Python}$ & $\chi^2_{4, 1 - \alpha}$ & Résultat\\
 \hline
-0.001 & 4.60820965608 & 0.55843452381 & 18.4668269529 & True\\
-0.025 & 4.60820965608 & 0.55843452381 & 11.1432867819 & True\\
-0.05 & 4.60820965608 & 0.55843452381 & 9.48772903678 & True\\
-0.1 & 4.60820965608 & 0.55843452381 & 7.77944033973 & True\\
+0.001 & 2.10122486772 & 4.61721693122 & 18.4668269529 & True\\
+0.025 & 2.10122486772 & 4.61721693122 & 11.1432867819 & True\\
+0.05 & 2.10122486772 & 4.61721693122 & 9.48772903678 & True\\
+0.1 & 2.10122486772 & 4.61721693122 & 7.77944033973 & True\\
 \hline
 \end{tabular}
 \end{center}
@@ -502,26 +503,26 @@ $D_\alpha$ & $\frac{1.63}{\sqrt{n}}$ & $\frac{1.36}{\sqrt{n}}$ & $\frac{1.22}{\s
 Le tableau suivant donne les résultats du test obtenus pour les deux générateurs : \\\\
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
- $n$ & $D_{n} (pirand)$ & $D_{n} (python)$ & $\alpha$ & $D_{\alpha = 0.01}$ & Res pirand & Res python\\ 
+ $n$ & $D_{n} (pirand)$ & $D_{n} (python)$ & $\alpha$ & $D_{\alpha}$ & Res pirand & Res python\\ 
 \hline 
-100&0.1&0.07308 & 0.01&0.163 & True & True\\\hline 
-100&0.1&0.07308 & 0.05&0.136 & True & True\\\hline 
-100&0.1&0.07308 & 0.1&0.122 & True & True\\\hline 
-100&0.1&0.07308 & 0.15&0.114 & True & True\\\hline 
-100&0.1&0.07308 & 0.2&0.107 & True & True\\\hline 
-1000&0.096&0.01928 & 0.01&0.05155 & False & True\\\hline 
-1000&0.096&0.01928 & 0.05&0.04301 & False & True\\\hline 
-1000&0.096&0.01928 & 0.1&0.03858 & False & True\\\hline 
-1000&0.096&0.01928 & 0.15&0.03605 & False & True\\\hline 
-1000&0.096&0.01928 & 0.2&0.03384 & False & True\\\hline 
-10000&0.0971&0.01041 & 0.01&0.0163 & False & True\\\hline 
-10000&0.0971&0.01041 & 0.05&0.0136 & False & True\\\hline 
-10000&0.0971&0.01041 & 0.1&0.0122 & False & True\\\hline 
-10000&0.0971&0.01041 & 0.15&0.0114 & False & True\\\hline 
-10000&0.0971&0.01041 & 0.2&0.0107 & False & True\\\hline
-\end{tabular}
-
-Nous remarquons que
+100&0.08219&0.06524 & 0.01&0.163 & True & True\\\hline 
+100&0.08219&0.06524 & 0.05&0.136 & True & True\\\hline 
+100&0.08219&0.06524 & 0.1&0.122 & True & True\\\hline 
+100&0.08219&0.06524 & 0.15&0.114 & True & True\\\hline 
+100&0.08219&0.06524 & 0.2&0.107 & True & True\\\hline 
+1000&0.03044&0.03801 & 0.01&0.05155 & True & True\\\hline 
+1000&0.03044&0.03801 & 0.05&0.04301 & True & True\\\hline 
+1000&0.03044&0.03801 & 0.1&0.03858 & True & True\\\hline 
+1000&0.03044&0.03801 & 0.15&0.03605 & True & False\\\hline 
+1000&0.03044&0.03801 & 0.2&0.03384 & True & False\\\hline 
+10000&0.01442&0.00591 & 0.01&0.0163 & True & True\\\hline 
+10000&0.01442&0.00591 & 0.05&0.0136 & False & True\\\hline 
+10000&0.01442&0.00591 & 0.1&0.0122 & False & True\\\hline 
+10000&0.01442&0.00591 & 0.15&0.0114 & False & True\\\hline 
+10000&0.01442&0.00591 & 0.2&0.0107 & False & True\\\hline
+\end{tabular}\\
+\newline 
+Nous remarquons que le générateur de python et le notre passent le test pour des séquences de 100 et 1000 nombres générés. Pour des séquences de 10000, notre teste passe seulement pour $\alpha = 0.01$. Nous pouvons en déduire que notre générateur est un peu inférieur à celui de python.
 
 
 \end{document}
