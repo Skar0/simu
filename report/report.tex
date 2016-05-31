@@ -60,7 +60,7 @@ Dr. Alain Buys
 %	DATE SECTION
 %----------------------------------------------------------------------------------------
 
-{\large 02 juin 2016}\\[3cm] % Date, change the \today to a set date if you want to be precise
+{\large 01 juin 2016}\\[3cm] % Date, change the \today to a set date if you want to be precise
 
 %----------------------------------------------------------------------------------------
 %	LOGO SECTION
@@ -89,7 +89,7 @@ avec le générateur intégré à Python.
 Nous allons maintenant étudier le caractère pseudo-aléatoire de $\pi$ grâce à plusieurs tests statistiques. \`A l'aide de séquences générées à partir de modèles faisant intervenir une loi uniforme, nous pourrons montrer le caractère pseudo-aléatoire des décimales à conditions que celles-ci aient les mêmes propriétés que les séquences.
 
 \subsection{Test de $\chi^2$}
-Le test de $\chi^2$ va nous permettre de tester l'adéquation des décimales de pi avec les familles de lois de probabilités que nous allons traiter par la suite. Pour se faire, on génère des séquences théoriques selon la loi de probabilité et on les répartis, ainsi que les décimales de $\pi$, en classes. Les effectifs de chaque classe sont comparés aux effectifs théoriques au moyen de l'équation ci-dessous :
+Le test de $\chi^2$ va nous permettre de tester l'adéquation des décimales de pi avec les familles de lois de probabilités que nous allons traiter par la suite. Pour ce faire, on génère des séquences théoriques selon la loi de probabilité et on les répartis, ainsi que les décimales de $\pi$, en classes. Les effectifs de chaque classe sont comparés aux effectifs théoriques au moyen de l'équation ci-dessous :
 \[ K = \displaystyle\sum_{i=1}^n (\frac{n_i-Np_i}{\sqrt{Np_i}})^2\]
 où $n_i$ est l'effectif observé de la classe $i$ et $Np_i$, l'effectif théorique (loi uniforme) de la classe $i$. On soumet le test à une probabilité $\alpha$ de rejeter l'hypothèse nulle $H_0$. Celle-ci est acceptée si $K \leq \chi_x^2$ où $x$ est le degré de liberté. \\Celui-ci s'obtient facilement : $x$ = nombre de classes - 1. \\
 
@@ -223,7 +223,7 @@ Les résultats visibles à la figure \ref{result2} montrent que le test de $\chi
 \subsection{Test du poker}
 
 Le test du poker consiste en la comparaison entre le fréquences théoriques des mains au poker avec les
-fréquences observées dans notre jeu de données. Pour transformer nos données en une main de poker, nous allons d'abord transformer les $1 000 000$ de décimales de $\pi$ en $200 000$ nombres de $5$ chiffres. Pour ce faire, nous allons simplement parcourir la liste des décimales fournie et y prendre 5 chiffres à la fois pour créer des nombres.\newline \newline
+fréquences observées dans notre jeu de données. Pour transformer nos données en une main de poker, nous allons d'abord transformer les $1 000 000$ de décimales de $\pi$ en $200 000$ nombres de $5$ chiffres. Pour ce faire, nous allons simplement parcourir la liste des décimales fournie et y prendre 5 chiffres à la fois pour créer des nombres.\newline 
 
 Nous allons ensuite compter le nombre de chiffres différents contenus dans ces nombres, ce qui nous donnera nos classes de la manière
 suivante : \\
@@ -278,9 +278,9 @@ r
 \end{equation*}
 \newline
 Dans notre cas nous avons des séquences de 5 chiffres ($k=5$), 10 chiffres possibles ($d=10$) et 5 classes citées précédemment ($r = 1...5$).\\
-Nous allons ensuite comparer les nombres observés d'occurrences de chaque classe et les comparer avec les valeurs théoriques avec un test de $\chi^2$ . Ces nombres d'occurrences théoriques sont obtenues en multipliant la probabilité calculée par la formule précédente par le nombre d'échantillons (un nombre de 5 chiffres constitue un échantillon) sur lequel le test est effectué (dans notre cas, ce nombre est 200000). \newline
+Nous allons ensuite comparer le nombres observé d'occurrences de chaque classe et le comparer avec le nombre d'occurrences théorique de chaque classe avec un test de $\chi^2$ . Ce nombre d'occurrences théorique est obtenu en multipliant la probabilité calculée par la formule précédente par le nombre d'échantillons (un nombre de 5 chiffres constitue un échantillon) sur lequel le test est effectué (dans notre cas, ce nombre est 200000). \newline
 
-La figure \ref{pokerhisto} montre les nombres d'occurrences théoriques et les nombres d'occurences théorique. Le nombre d'occurrences de séquences ayant 5 chiffres identiques est extrêmement petit, qui explique pourquoi il n'est pas visible.\\
+La figure \ref{pokerhisto} montre le nombre d'occurrences théorique et le nombre d'occurrences observé. Le nombre d'occurrences de séquences ayant 5 chiffres identiques est extrêmement petit, ce qui explique pourquoi il n'est pas visible sur le graphique.\\
 
 \begin{figure}[H]
 \makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{poker_histogram.png}}
@@ -323,11 +323,11 @@ $\alpha$ & $K_{n}$ & $\chi^2_{4, 1 - \alpha}$ & Résultat\\
 
 Nous remarquons que les décimales de $\pi$ fournies réussissent le test de Poker pour tous les $\alpha$ choisis.
 \subsection{Test du collectionneur de coupons}
-Le test du collectionneur de coupons s'effectue en créant des séquences de chiffres à partir de la liste des décimales de $\pi$ On augmente la séquence d'un chiffre tant qu'elle ne contient pas tous les chiffres possibles. Une fois que tous les chiffres sont contenus dans la séquence, la taille de celle-ci est sauvée et devient sa classe. Une autre séquence est alors construite. Ce procédé continue tant qu'il reste des chiffres dans la liste de décimales fournie.\newline
+Le test du collectionneur de coupons s'effectue en créant des séquences de chiffres à partir de la liste des décimales de $\pi$. On ajoute un chiffre à la séquence tant qu'elle ne contient pas tous les chiffres possibles. Une fois que tous les chiffres sont contenus dans la séquence, la taille de celle-ci est sauvée et devient sa classe. Une autre séquence est alors construite. Ce procédé continue tant qu'il reste des chiffres dans la liste de décimales fournie.\newline
 
 Nous pouvons calculer le nombre théorique d'occurrences pour chaque longueur de séquence de la manière suivante :
 
-Il est tout d'abord logique que des séquences de longueur strictement inférieure à 10 ne seront jamais observées. En effet il est impossible que tous les chiffres de 1 à 9 soient contenus dans une telle séquence. \newline
+Il est tout d'abord logique que des séquences de longueur strictement inférieure à 10 ne seront jamais observées. En effet il est impossible que tous les chiffres de 0 à 9 soient contenus dans une telle séquence.
 Il est possible de calculer la probabilité $S_r$ de contenir tous les chiffres dans une séquence de longueur $r$ avec la formule suivante
 \begin{equation*}
 S_r = 
@@ -348,9 +348,9 @@ d
 \end{Bmatrix}
 \frac{d!}{d^t-1}
 \end{equation*}
-Pour obtenir les nombres d'occurrences théoriques, nous avons multiplié ces probabilités par le nombre de séquences crées par le test.\newline
+Pour obtenir le nombre d'occurrences théorique, nous avons multiplié ces probabilités par le nombre de séquences crées par le test.\newline
  
-La figure \ref{couponshisto} présente les nombres d'occurrences théoriques et les nombres d'occurrences observées pour des tailles de séquence allant de 0 à 100. Nous avons remarqués que pour des tailles supérieures ou égales à 100, le nombre d'occurrence pour les différentes tailles était très petit voir nul pour certaines tailles. Nous avons alors décidés de nous limiter à des tailles strictement inférieures à 100 tout en mettant le nombre de séquences de taille supérieure ou égales à 100 dans une classe spéciale et en la comparant au nombre d'occurrence théorique calculés avec la formule présentée ci-avant. Ceci explique que les deux barres les plus à droite sur le graphique ont un nombre d'occurrences plus élevés.
+La figure \ref{couponshisto} présente le nombre d'occurrences théorique et le nombre d'occurrences observé pour des tailles de séquence allant de 0 à 100. Nous avons remarqués que pour des tailles supérieures ou égales à 100, le nombre d'occurrences était très petit voir nul pour certaines tailles. Nous avons alors décidés de nous limiter à des tailles strictement inférieures à 100 tout en mettant le nombre de séquences de taille supérieure ou égales à 100 dans une classe spéciale et en la comparant au nombre d'occurrences théoriques calculé avec la formule présentée ci-avant. Ceci explique que les deux barres les plus à droite sur le graphique ont un nombre d'occurrences plus élevé.
 \begin{figure}[H]
 \makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{coupons_histogram.png}}
 \caption{Comparaison des résultats du test du collectionneur de coupons}
@@ -402,7 +402,7 @@ $\vdots$ & $\vdots$ & $\vdots$ \\
 \caption{Tableau des effectifs pour chaque classe.}
 \end{figure}
 
-Le tableau suivant nous donne le résultat du test de $chi^2$ utilisé pour comparer nos observations avec les effectifs théoriques. Nous remarquons que le test est réussi pour tous les $\alpha$ donnés.
+Le tableau suivant nous donne le résultat du test de $\chi^2$ utilisé pour comparer nos observations avec les effectifs théoriques. Nous remarquons que le test est réussi pour tous les $\alpha$ donnés.
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
@@ -421,12 +421,15 @@ $\alpha$ & $K_{n}$ & $\chi^2_{100, 1 - \alpha}$ & Résultat\\
 
 \newpage
 
-\section{Générateur de nombres pseudo-aléatoires}
-Nous allons maintenant expliquer comment générer des nombres aléatoires dans $[0, 1[$ à partir des décimales de $\pi$ et cela de manière uniforme. Ensuite, nous comparerons ce générateur avec celui inclus dans Python.
-\subsection{Principe}
-Le moment précis auquel on demande de générer un nombre est le seul véritable caractère aléatoire que nous pourrons utiliser pour créer le générateur. On utilise donc le temps en millisecondes écoulé depuis le 1$^{er}$ janvier 1970. Afin d'obtenir dans un intervalle de temps très petit des valeurs complètement différentes, on ne retient que les 6 premiers chiffres après la virgule du nombre obtenu et on inverse l'ordre de ses chiffres (simplement via des opérations de modulo et de divisions entières). Le nombre résultant correspond à un indice dans le tableau des décimales de $\pi$. On charge de cette façon 16 indices, ce qui va correspondre à 16 digits. Ces 16 chiffres forment un nombre $x \in [0, 1e16[$. Il suffit de le diviser par $1e16$ et on obtient un nombre à 16 chiffres après la virgule dans l'intervalle $[0, 1[$. Si on veut récupérer un autre nombre aléatoire, il suffit d'ajouter 1 à tous les indices récupérés (modulo 1e6) à l'étape précédente et ensuite recommencer le processus. En résumé, on a donc 16 compteurs, qu'on itère de 1 à chaque requête de génération de nombre aléatoire, qui correspondent chacun à un indice dans le tableau des décimales de $\pi$, à partir desquels on obtient 16 digits qui forment un nombre aléatoire. Notons qu'après 1 million d'itérations, de par l'incrémentation des compteurs, des nombres précédemment générés vont apparaitre car on aura parcouru l'entièreté des décimales de $\pi$. Pour palier à cela, on réinitialise le générateur et ses compteurs à l'aide du temps UNIX.\\
+\subsection{Conclusion}
+Les différents tests effectués sur les décimales de $\pi$ ont montrés que celles-ci suivent bien une répartition uniforme et ce même pour plusieurs erreurs. Nous concluons donc que les décimales de $\pi$ on les mêmes caractéristiques qu'une série de nombre pseudo-aléatoires générés à partir d'une loi uniforme. 
 
-Afin de comparer le générateur avec celui de Python, chacun des deux générateurs vont générer 1 million de valeurs. Nous allons appliquer les tests de la section précédente à ces deux générateurs. Ces tests ne seront plus appliqués à des valeurs discrètes, mais cette fois à des valeurs continues. On se sert donc de $\chi^2$ pour vérifier lequel des deux générateurs suit le plus une loi normale et continue. Le meilleur générateur sera celui qui aura la plus petite valeur de $K$.
+\section{Générateur de nombres pseudo-aléatoires}
+Nous allons maintenant expliquer comment générer des nombres pseudo-aléatoires dans $[0, 1[$ à partir des décimales de $\pi$ et cela de manière uniforme. Ensuite, nous comparerons ce générateur avec celui inclus dans Python.
+\subsection{Principe}
+Le moment précis auquel on demande de générer un nombre est le seul véritable caractère aléatoire que nous pourrons utiliser pour créer le générateur. On utilise donc le temps en secondes écoulé depuis le 1$^{er}$ janvier 1970. Afin d'obtenir dans un intervalle de temps très petit des valeurs complètement différentes, on ne retient que les 6 premiers chiffres après la virgule du nombre obtenu et on inverse l'ordre de ses chiffres (simplement via des opérations de modulo et de divisions entières). Le nombre résultant correspond à un indice dans le tableau des décimales de $\pi$. On charge de cette façon 16 indices, ce qui va correspondre à 16 digits. Ces 16 chiffres forment un nombre $x \in [0, 1e16[$. Il suffit de le diviser par $1e16$ et on obtient un nombre à 16 chiffres après la virgule dans l'intervalle $[0, 1[$. Si on veut récupérer un autre nombre aléatoire, il suffit d'ajouter 1 à tous les indices récupérés (modulo 1e6) à l'étape précédente et ensuite recommencer le processus. En résumé, on a donc 16 compteurs, qu'on itère de 1 à chaque requête de génération de nombre aléatoire, qui correspondent chacun à un indice dans le tableau des décimales de $\pi$, à partir desquels on obtient 16 digits qui forment un nombre aléatoire. Notons qu'après 1 million d'itérations, de par l'incrémentation des compteurs, des nombres précédemment générés vont apparaitre car on aura parcouru l'entièreté des décimales de $\pi$. Pour palier à cela, on réinitialise le générateur et ses compteurs à l'aide du temps UNIX.\\
+
+Afin de comparer le générateur avec celui de Python, chacun des deux générateurs vont générer 1 million de valeurs. Nous allons appliquer les tests de la section précédente à ces deux générateurs. Ces tests ne seront plus appliqués à des valeurs discrètes, mais cette fois à des valeurs continues. On se sert donc de $\chi^2$ pour vérifier lequel des deux générateurs suit le plus une loi continue. Le meilleur générateur sera celui qui aura la plus petite valeur de $K$.
 
 \subsection{Test de $\chi^2$}
 
@@ -541,7 +544,7 @@ $\alpha$ & $K_{\pi}$ & $K_{Python}$ & $\chi^2_{16, 1 - \alpha}$ & Résultat\\
 Encore une fois, les résultats du test de $\chi^2$ présentés à la figure \ref{gapresult2} sont meilleurs du côté du générateur utilisant $\pi$.
 
 \subsection{Test du poker}
-Afin de comparer les deux générateur en utilisant le test du poker nous allons prendre les nombres aléatoires $\in [0,1[$, les multiplier par 10 et prendre leur partie entière. Nous obtenons ainsi des nombres $\in [0,1,2,3,4,5,6,7,8,9]$. Nous pouvons ensuite effectuer le test du poker tel que décrit précédemment sur les données ainsi transformées. Effectuer le test sur ces données transformées est équivalent à diviser $[0,1]$ en 10 intervalles, car 0 correspondra à l'intervalle $[0,0.1[$ 1 à l'intervalle $[0.1,0.2[$ et ce jusqu'à 9 qui correspondra à $[0.9,1[$.\newline \newline
+Afin de comparer les deux générateur en utilisant le test du poker nous allons prendre les nombres générés $\in [0,1[$, les multiplier par 10 et prendre leur partie entière. Nous obtenons ainsi des nombres $\in (0,1,2,3,4,5,6,7,8,9)$. Nous pouvons ensuite effectuer le test du poker tel que décrit précédemment sur les données ainsi transformées. Effectuer le test sur ces données transformées est équivalent à diviser $[0,1[$ en 10 intervalles, car 0 correspondra à l'intervalle $[0,0.1[$ 1 à l'intervalle $[0.1,0.2[$ et ce jusqu'à 9 qui correspondra à $[0.9,1[$.\newline \newline
 La figure \ref{poker_generator_histogram} présente le nombre d'occurrences théoriques et le nombre d'occurrences observées pour les deux générateurs.
 
 \begin{figure}[H]
@@ -554,7 +557,7 @@ Le tableau suivant reprend les valeur observées et les valeurs théoriques pour
 \begin{center}
 \begin{longtable}{|c|c|c|c|c|}
 \hline
-classes & eff. observé ($\pi$Rand) & eff. observé (Python rand) & eff. théorique\\
+configurations & eff. observé ($\pi$Rand) & eff. observé (Python rand) & eff. théorique\\
 \hline
 
 
@@ -584,12 +587,12 @@ $\alpha$ & $K_{\pi Rand}$ & $K_{Python}$ & $\chi^2_{4, 1 - \alpha}$ & Résultat\
 \caption{Résultat du test de $\chi^2$}
 \end{figure}
 
-Nous remarquons que le générateur de python suit mieux les effectifs théoriques pour le test du poker. Nous en concluons que le générateur de python est meilleur pour ce test.
+Nous remarquons que notre générateur possède une valeur de $K$ plus petit lors du test de $\chi^2$.
 
 \subsection{Test de Kolmogorov-Smirnov}
 Le test de Kolmogorov-Smirnov est un test permettant de tester si les données observées sont engendrées par une loi connue. Nous devons donc connaitre cette loi et celle-ci doit être continue. Pour effectuer le test, nous allons comparer l'écart maximum entre la fonction de répartition théorique F et la fonction de répartition empirique $F_n$. Dans notre cas, F sera la loi uniforme continue.
 \begin{center}
- $ F_n(x) = \frac{\text{nombre de valeurs } \leq x}{n}$\\ 
+ $ F_n(x) = \frac{\text{nombre de valeurs } \leq x}{n}$\\
  $ F(x) =
 \left\{
 	\begin{array}{lll}
@@ -601,7 +604,7 @@ Le test de Kolmogorov-Smirnov est un test permettant de tester si les données o
 $
 \end{center}
 Et on va calculer $D_n = \max_{x\in R} |F_n(x)-F(x)|$ \\
-Pour que le test réussisse, il faut que les valeurs de $D_n$ soient inférieurs aux valeurs théoriques $D_\alpha$ pour un $\alpha$ choisi. Le tableau suivant reprend les valeurs de $D_\alpha$ en fonction des valeurs de $\alpha$ pour des $n > 35$. 
+Pour que le test réussisse, il faut que les valeurs de $D_n$ soient inférieures aux valeurs théoriques $D_\alpha$ pour un $\alpha$ choisi. Le tableau suivant reprend les valeurs de $D_\alpha$ en fonction des valeurs de $\alpha$ pour des $n > 35$. 
 
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -613,6 +616,7 @@ $D_\alpha$ & $\frac{1.63}{\sqrt{n}}$ & $\frac{1.36}{\sqrt{n}}$ & $\frac{1.22}{\s
 \end{tabular}
 \end{center}
 Le tableau suivant donne les résultats du test obtenus pour les deux générateurs : \\\\
+\begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
  $n$ & $D_{n} (pirand)$ & $D_{n} (python)$ & $\alpha$ & $D_{\alpha}$ & Res pirand & Res python\\ 
@@ -633,17 +637,18 @@ Le tableau suivant donne les résultats du test obtenus pour les deux générate
 10000&0.01442&0.00591 & 0.15&0.0114 & False & True\\\hline 
 10000&0.01442&0.00591 & 0.2&0.0107 & False & True\\\hline
 \end{tabular}\\
-\newline 
-Nous remarquons que le générateur de python et le notre passent le test pour des séquences de 100 et 1000 nombres générés. Pour des séquences de 10000, notre test passe seulement pour $\alpha = 0.01$. Nous pouvons en déduire que notre générateur est un peu inférieur à celui de python dans le cadre de ce test.
+\end{center}
+\bigskip
+Nous remarquons que le générateur de Python et le notre passent le test pour des séquences de 100 et 1000 nombres générés. Pour des séquences de 10000, notre test passe seulement pour $\alpha = 0.01$. Nous pouvons en déduire que notre générateur est un peu inférieur à celui de python dans le cadre de ce test.
 
 \section{Conclusion}
-\`A première vue, en se fiant aux tests que l'on a effectué à la section précédente, on aurait tendance à dire que le générateur se basant sur les décimales de $\pi$ semble meilleur. Cependant, ce générateur nécessite, lors de la génération du premier nombre (et donc son initialisation), de lire le fichier contenant les 1 million de décimales de $\pi$ afin de les charger en mémoire, ce qui est très lent et coûteux en mémoire.\\
-Le générateur de Python ne correspond pas aussi fidèlement (mais a tout de même le mérite de passer les tests) à la générations de nombre suivant lois normales et continues testées, mais génère ses nombres très rapidement et est beaucoup moins coûteux en mémoire.
+En se fiant aux tests que l'on a effectué à la section précédente, on aurait tendance à dire que le générateur se basant sur les décimales de $\pi$ semble meilleur. Cependant, ce générateur nécessite, lors de la génération du premier nombre (et donc son initialisation), de lire le fichier contenant les 1 million de décimales de $\pi$ afin de les charger en mémoire, ce qui est très lent et coûteux en mémoire.\\
+Le générateur de Python ne correspond pas aussi fidèlement à un générateur de nombre suivant la loi uniforme continue, mais génère ses nombres très rapidement et est beaucoup moins coûteux en mémoire.
 \newpage
 \section*{Annexe}
-\subsection{Code source}
-\subsubsection{Tests}
-Tous les tests référencés dans ce rapport sont implémentés dans le module $tests$. Le programme qui lance les tests sont \textit{main\_tests.py} pour ceux de la première section et \textit{pirand\_main\_tests.py} pour ceux de la deuxième.
-\subsubsection{Générateur de nombres pseudo-aléatoires}
+\subsection*{Code source}
+\subsubsection*{Tests}
+Tous les tests référencés dans ce rapport sont implémentés dans le module $tests$. Le programme qui lance les tests est \textit{main\_tests.py} pour ceux de la première section et \textit{pirand\_main\_tests.py} pour ceux de la deuxième.
+\subsubsection*{Générateur de nombres pseudo-aléatoires}
 Le générateur se nomme \textit{pirand.py} et nécessite le programme python \textit{piLoader} se situant dans le module \textit{tools}. Après avoir importé le générateur dans un programme python avec la commande \textit{import pirand}, l'appel de \textit{pirand.next()} génèrera un nombre aléatoire comme expliqué à la section précédente.
 \end{document}
