@@ -4,7 +4,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as numpy
 
-from continuous_tests import poker
+from tests import poker
 
 
 def make_classes(n, dataset):

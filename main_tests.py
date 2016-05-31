@@ -1,4 +1,4 @@
-from continuous_tests import khi2, gap, coupons, poker
+from tests import khi2, gap, coupons, poker
 from tools import piLoader, latex
 
 data = piLoader.piDigits()

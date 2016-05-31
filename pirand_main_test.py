@@ -4,7 +4,7 @@ import numpy
 from tools import piLoader, latex
 import pirand
 import random
-from continuous_tests import poker, khi2, gap, coupons, kolmogorov
+from tests import poker, khi2, gap, coupons, kolmogorov
 import matplotlib.pyplot as plt
 import numpy as numpy
 
