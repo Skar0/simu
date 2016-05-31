@@ -68,29 +68,6 @@ def poker_test():
     plt.savefig("report/poker_generator_histogram.png", bbox_inches='tight')
 
 
-def coupons_test():
-    print '%' + '-' * 69 + '\n' + '% COUPONS TEST\n' + '%' + '-' * 69 + '\n'
-    coupons_pirand_data = coupons.make_classes(100,poker.dataset(pirand_data))
-    pirand_sample_number = coupons_pirand_data[0]
-    pirand_dataset = coupons_pirand_data[1]
-    theoretical_dataset_pirand = coupons.theoretical(100,10,pirand_sample_number)
-
-    coupons_python_data = coupons.make_classes(100,poker.dataset(python_data))
-    python_sample_number = coupons_python_data[0]
-    python_dataset = coupons_python_data[1]
-    theoretical_dataset_python = coupons.theoretical(100,10,python_sample_number)
-
-    print latex.table_generator('classes',[pirand_dataset[10:],python_dataset[10:]],
-                        [theoretical_dataset_pirand[10:],theoretical_dataset_python[10:]],0, ["\piRand", "Python rand"])
-    khi_pirand = khi2.k(pirand_dataset[10:],theoretical_dataset_pirand[10:])
-    khi_python = khi2.k(python_dataset[10:],theoretical_dataset_python[10:])
-
-    print latex.khi2_table_generator([khi_pirand,khi_python],len(pirand_dataset[10:]),["\piRand", "Python"])
-    coupons.comparative_histogram(theoretical_dataset_pirand,pirand_dataset,"couponshistocomp2")
-    coupons.comparative_histogram(theoretical_dataset_python,python_dataset,"couponshistocomp1")
-    print '\n'
-
-
 def kolmogorov_test():
     print '%' + '-' * 69 + '\n' + '% KOLMOGOROV TEST\n' + '%' + '-' * 69 + '\n'
     kolmo_100 = [kolmogorov.kolmo(pirand_data[:100], kolmogorov.theoretical_distribution),
@@ -115,5 +92,4 @@ comparative_histogram()
 khi2_test()
 gap_test()
 poker_test()
-coupons_test()
 kolmogorov_test()
