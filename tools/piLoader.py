@@ -7,7 +7,7 @@ def piDigits():
     digits = []
     for line in file :
         for digit in line:
-            if digit != '\n' : digits.append(int(digit))
+            if not digit.isspace() : digits.append(int(digit))
 
     file.close()
     return digits
